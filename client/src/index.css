@@ -1,0 +1,15 @@
+:root {
+  --primary: rgb(199, 106, 0);
+  --secondary: rgb(59, 170, 15);
+  --tertiary: rgb(130, 9, 155);
+  --light: rgba(0, 0, 0, 1);
+  --dark: rgba(0, 0, 0, 1);
+  --error: rgb(196, 39, 0);
+  --spacing-one: calc(1rem * 0.5);
+  --spacing-two: calc(1rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
