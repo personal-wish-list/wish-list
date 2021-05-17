@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { idbPromise } from "../../utils/helpers";
 import './css/style.css';
+
+import { idbPromise } from "../../utils/helpers";
 
 const AddItemForm = () => {
     const [formState, setFormState] =
@@ -23,7 +24,7 @@ const AddItemForm = () => {
         e.preventDefault();
         console.log(formState);
 
-        idbPromise('wish_list', 'put', {
+        idbPromise('wishlist', 'put', {
             ...formState
         });
     };
@@ -75,7 +76,7 @@ const AddItemForm = () => {
                     />
                 </div>
                 <div className="form-input">
-                    <label htmlFor="price">Price:</label>
+                    <label htmlFor="price">Price: $</label>
                     <input
                         type="number"
                         name="price"
