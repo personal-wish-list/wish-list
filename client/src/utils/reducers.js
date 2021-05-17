@@ -3,7 +3,7 @@ import {
 } from './actions';
 
 const initialState = {
-
+    wish_list: []
 }
 
 const reducer = (state = initialState, action) => {

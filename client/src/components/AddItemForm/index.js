@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { idbPromise } from "../../utils/helpers";
 import './css/style.css';
 
 const AddItemForm = () => {
     const [formState, setFormState] =
         useState({
+            _id: '',
             name: '',
             link: '',
             price: '',
             specialNote: ''
         });
     const {
+        _id,
         name,
         link,
         price,
@@ -19,6 +22,10 @@ const AddItemForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(formState);
+
+        idbPromise('wish_list', 'put', {
+            ...formState
+        });
     };
 
     const handleChange = e => {
@@ -35,6 +42,20 @@ const AddItemForm = () => {
                 id='add-item-form'
                 onSubmit={handleSubmit}
             >
+
+
+                {/* ================= FOR TESTING ONLY ================ */}
+                <div className="form-input">
+                    <label htmlFor="_id">ID:</label>
+                    <input
+                        type="text"
+                        name="_id"
+                        defaultValue={_id}
+                        onBlur={handleChange}
+                    />
+                </div>
+                {/* =================================================== */}
+
                 <div className="form-input">
                     <label htmlFor="name">Name:</label>
                     <input
