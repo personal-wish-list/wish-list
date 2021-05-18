@@ -27,9 +27,7 @@ const WishList = () => {
         }
     }, [state.wishlist.length, dispatch]);
 
-    // const items = idbPromise('wishlist', 'get');
-    // console.log(state.wishlist);
-
+    
 
     return (
         <div className="container">
