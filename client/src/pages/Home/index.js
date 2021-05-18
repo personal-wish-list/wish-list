@@ -1,7 +1,7 @@
 import React from "react";
 import './css/style.css';
 
-import WishList from '../../components/WishList';
+import WishList from '../WishList';
 
 const Home = () => {
     return (

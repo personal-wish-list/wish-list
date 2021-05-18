@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import './css/style.css';
 
-import AddItemForm from '../AddItemForm';
-import ListItem from '../ListItem';
+import AddItemForm from '../../components/AddItemForm';
+import ListItem from '../../components/ListItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/helpers';
@@ -31,9 +31,7 @@ const WishList = () => {
 
     return (
         <div className="container">
-            <div>
-                WishList says <span className="text-purple">"Hello World!"</span>
-            </div>
+            
             <AddItemForm />
 
             {state.wishlist.length ? (
