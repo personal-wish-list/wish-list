@@ -6,23 +6,29 @@ import ListItem from '../ListItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/helpers';
+import { ADD_MULTIPLE_TO_WISHLIST } from "../../utils/actions";
+
 
 const WishList = () => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const getItems = async () => {
-            const items = await idbPromise('wishlist', 'get');
+        const getWishlist = async () => {
+            const wishlist = await idbPromise('wishlist', 'get');
+            dispatch({
+                type: ADD_MULTIPLE_TO_WISHLIST,
+                items: [...wishlist]
+            })
         }
 
         if (!state.wishlist.length) {
-            getItems();
+            getWishlist();
         }
     }, [state.wishlist.length, dispatch]);
 
     // const items = idbPromise('wishlist', 'get');
-    // console.log(items);
+    // console.log(state.wishlist);
 
 
     return (
@@ -46,7 +52,7 @@ const WishList = () => {
                     Add items to your wishlist if you want gifts
                 </div>
             )}
-            {/* <ListItem /> */}
+
         </div>
     );
 };

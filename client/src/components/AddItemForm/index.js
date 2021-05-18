@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import './css/style.css';
 
+import { useSelector, useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/helpers";
+import { ADD_TO_WISHLIST } from "../../utils/actions";
 
 const AddItemForm = () => {
-    const [formState, setFormState] =
-        useState({
+    const state = useSelector(state => state);
+    const dispatch = useDispatch();
+
+    const [formState, setFormState]
+        = useState({
             _id: '',
             name: '',
             link: '',
@@ -23,6 +28,11 @@ const AddItemForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(formState);
+
+        dispatch({
+            type: ADD_TO_WISHLIST,
+            item: { ...formState }
+        });
 
         idbPromise('wishlist', 'put', {
             ...formState
