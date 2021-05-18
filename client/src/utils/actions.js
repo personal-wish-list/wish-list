@@ -1,2 +1,2 @@
-// example
-// export const UPDATE_PRODUCTS = "UPDATE_PRODUCTS";
+export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
+export const ADD_MULTIPLE_TO_WISHLIST = 'ADD_MULTIPLE_TO_WISHLIST';
