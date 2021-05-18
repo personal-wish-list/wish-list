@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import './css/style.css';
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/helpers";
 import { ADD_TO_WISHLIST } from "../../utils/actions";
 
 const AddItemForm = () => {
-    const state = useSelector(state => state);
     const dispatch = useDispatch();
 
     const [formState, setFormState]

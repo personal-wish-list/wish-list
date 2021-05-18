@@ -1,5 +1,6 @@
 import {
-    ADD_TO_WISHLIST
+    ADD_TO_WISHLIST,
+    ADD_MULTIPLE_TO_WISHLIST
 } from './actions';
 
 const initialState = {
@@ -9,13 +10,13 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         // ============ WISHLIST CASES START ===================================================
-        case 'ADD_TO_WISHLIST':
+        case ADD_TO_WISHLIST:
             return {
                 ...state,
                 wishlist: [...state.wishlist, action.item]
             };
 
-        case 'ADD_MULTIPLE_TO_WISHLIST':
+        case ADD_MULTIPLE_TO_WISHLIST:
             return {
                 ...state,
                 wishlist: [...state.wishlist, ...action.items]
