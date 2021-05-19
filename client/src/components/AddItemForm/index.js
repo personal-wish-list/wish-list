@@ -14,14 +14,18 @@ const AddItemForm = () => {
             name: '',
             link: '',
             price: '',
-            specialNote: ''
+            specialNote: '',
+            isClaimed: false,
+            isClaimedBy: ''
         });
     const {
         _id,
         name,
         link,
         price,
-        specialNote
+        specialNote,
+        isClaimed,
+        isClaimedBy
     } = formState;
 
     const handleSubmit = e => {
