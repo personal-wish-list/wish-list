@@ -37,8 +37,16 @@ const AddItemForm = () => {
             item: { ...formState }
         });
 
+        idbPromise('secret list', 'put', {
+            ...formState,
+            isClaimed: isClaimed,
+            isClaimedBy: isClaimedBy
+        });
+
         idbPromise('wishlist', 'put', {
-            ...formState
+            ...formState,
+            isClaimed: isClaimed,
+            isClaimedBy: isClaimedBy
         });
     };
 
