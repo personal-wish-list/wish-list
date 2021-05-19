@@ -1,7 +1,9 @@
 import React from "react";
 import './css/style.css';
 
-import WishList from '../WishList';
+import Wishlist from '../Wishlist';
+import SecretList from '../SecretList';
+import ShoppingList from "../ShoppingList";
 
 const Home = () => {
     return (
@@ -9,7 +11,15 @@ const Home = () => {
             <div>
                 Home says <span className="text-green">"hi!"</span>
             </div>
-            <WishList />
+
+
+            {/* =============== FOR TESTING PURPOSES ================= */}
+            <Wishlist />
+            <SecretList />
+            <ShoppingList />
+            {/* ====================================================== */}
+
+
         </div>
     );
 };

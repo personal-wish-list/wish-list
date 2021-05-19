@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './css/style.css';
 
 import { useDispatch } from 'react-redux'
-import { idbPromise } from "../../utils/helpers";
+import { idbPromise } from "../../utils/idb";
 import { ADD_TO_WISHLIST } from "../../utils/actions";
 
 const AddItemForm = () => {
@@ -37,8 +37,16 @@ const AddItemForm = () => {
             item: { ...formState }
         });
 
+        idbPromise('secret list', 'put', {
+            ...formState,
+            isClaimed: isClaimed,
+            isClaimedBy: isClaimedBy
+        });
+
         idbPromise('wishlist', 'put', {
-            ...formState
+            ...formState,
+            isClaimed: isClaimed,
+            isClaimedBy: isClaimedBy
         });
     };
 

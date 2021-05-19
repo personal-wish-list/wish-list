@@ -1,6 +1,8 @@
 import React from "react";
 import './css/style.css';
 
+import { formatUrl } from '../../utils/helpers';
+
 const ListItem = ({ item }) => {
     const {
         name,
@@ -16,7 +18,7 @@ const ListItem = ({ item }) => {
                     {name}
                     <span> ${price}</span>
                 </h3>
-                <a href={link}>{link}</a>
+                <a href={link}>{formatUrl(link)}</a>
                 <p>{specialNote}</p>
             </div>
         </div>
