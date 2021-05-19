@@ -5,6 +5,15 @@ export function pluralize(name, count) {
   return name + 's'
 }
 
+export function formatUrl(url) {
+  return url
+    .replace("http://", "")
+    .replace("https://", "")
+    .replace("www.", "")
+    .split("/")[0]
+    .split("?")[0];
+}
+
 export function idbPromise(storeName, method, object) {
   return new Promise((resolve, reject) => {
     // open connection to the database `wish-list` with the version of 1
