@@ -1,7 +1,7 @@
 import React from "react";
 import './css/style.css';
 
-import WishList from '../WishList';
+import Wishlist from '../Wishlist';
 import SecretList from '../SecretList';
 import ShoppingList from "../ShoppingList";
 
@@ -14,7 +14,7 @@ const Home = () => {
 
 
             {/* =============== FOR TESTING PURPOSES ================= */}
-            <WishList />
+            <Wishlist />
             <SecretList />
             <ShoppingList />
             {/* ====================================================== */}

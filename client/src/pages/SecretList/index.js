@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import './css/style.css';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { idbPromise } from '../../utils/helpers';
+import { idbPromise } from '../../utils/idb';
 import { ADD_MULTIPLE_TO_SECRET_LIST } from "../../utils/actions";
 
 const SecretList = () => {

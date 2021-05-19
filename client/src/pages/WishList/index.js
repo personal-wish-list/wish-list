@@ -5,7 +5,7 @@ import AddItemForm from '../../components/AddItemForm';
 import WishListItem from '../../components/WishListItem';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { idbPromise } from '../../utils/helpers';
+import { idbPromise } from '../../utils/idb';
 import { ADD_MULTIPLE_TO_WISHLIST } from "../../utils/actions";
 
 
