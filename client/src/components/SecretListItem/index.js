@@ -1,9 +1,14 @@
 import React from "react";
 import './css/style.css';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { idbPromise } from '../../utils/idb';
+import { ADD_TO_SHOPPING_LIST } from '../../utils/actions';
 import { formatUrl } from '../../utils/helpers';
 
 const SecretListItem = ({ item }) => {
+    const state = useSelector(state => state);
+    const dispatch = useDispatch();
     const {
         name,
         price,
@@ -14,7 +19,18 @@ const SecretListItem = ({ item }) => {
     } = item;
 
     const handleClaimGift = () => {
-        console.log(item.name);
+        console.log(name);
+        console.log(state);
+        dispatch({
+            type: ADD_TO_SHOPPING_LIST,
+            item: { ...item, claimed: true, claimedBy: 'Me' }
+        });
+
+        idbPromise('shopping list', 'put', {
+            ...item,
+            claimed: true,
+            claimedBy: 'Me'
+        })
     };
 
     return (
@@ -36,7 +52,7 @@ const SecretListItem = ({ item }) => {
                     <div>
                         <button
                             id="claim-gift"
-                            onClick={handleClaimGift()}
+                            onClick={handleClaimGift}
                         >
                             Claim Gift
                         </button>

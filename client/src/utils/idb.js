@@ -15,7 +15,7 @@ export function idbPromise(storeName, method, object) {
             // example:
             db.createObjectStore('wishlist', { keyPath: '_id' });
             db.createObjectStore('secret list', { keyPath: '_id' });
-
+            db.createObjectStore('shopping list', { keyPath: '_id' });
         };
 
         // handle any errors with connecting

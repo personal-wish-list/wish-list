@@ -16,7 +16,7 @@ const Home = () => {
             {/* =============== FOR TESTING PURPOSES ================= */}
             <Wishlist />
             <SecretList />
-            <ShoppingList />
+            {/* <ShoppingList /> */}
             {/* ====================================================== */}
 
 
