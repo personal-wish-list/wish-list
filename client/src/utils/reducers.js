@@ -1,9 +1,12 @@
 import {
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
+
+    ADD_TO_SECRET_LIST,
     ADD_MULTIPLE_TO_SECRET_LIST,
-    ADD_TO_SHOPPING_LIST,
     UPDATE_SECRET_LIST_ITEM,
+
+    ADD_TO_SHOPPING_LIST,
     ADD_MULTIPLE_TO_SHOPPING_LIST
 } from './actions';
 
@@ -30,6 +33,12 @@ const reducer = (state = initialState, action) => {
         // ============ WISHLIST CASES END =======================================================
 
         // ============= SECRET LIST CASES START =====================================================
+        case ADD_TO_SECRET_LIST:
+            return {
+                ...state,
+                secretList: [...state.secretList, action.item]
+            };
+        
         case ADD_MULTIPLE_TO_SECRET_LIST:
             return {
                 ...state,

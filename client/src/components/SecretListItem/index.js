@@ -19,15 +19,9 @@ const SecretListItem = ({ item }) => {
         isClaimed,
         isClaimedBy
     } = item;
-    console.log(isClaimed);
-    console.log(isClaimedBy);
 
     const handleClaimGift = () => {
-        console.log(name);
-        console.log(state);
-
         const itemInShoppingList = shoppingList.find(item => item._id === _id);
-        console.log(itemInShoppingList);
 
         if (itemInShoppingList) return;
         else {
@@ -38,7 +32,11 @@ const SecretListItem = ({ item }) => {
 
             dispatch({
                 type: ADD_TO_SHOPPING_LIST,
-                item: { ...item, isClaimed: isClaimed, isClaimedBy: isClaimedBy }
+                item: {
+                    ...item,
+                    isClaimed: isClaimed,
+                    isClaimedBy: isClaimedBy
+                }
             });
 
             idbPromise('shopping list', 'put', {
@@ -49,7 +47,11 @@ const SecretListItem = ({ item }) => {
 
             dispatch({
                 type: UPDATE_SECRET_LIST_ITEM,
-                item: { ...item, isClaimed: isClaimed, isClaimedBy: isClaimedBy }
+                item: {
+                    ...item,
+                    isClaimed: isClaimed,
+                    isClaimedBy: isClaimedBy
+                }
             });
 
             idbPromise('secret list', 'put', {
