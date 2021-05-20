@@ -9,40 +9,46 @@ import { formatUrl } from '../../utils/helpers';
 const SecretListItem = ({ item }) => {
     const state = useSelector(state => state);
     const { shoppingList } = state;
+    const itemInShoppingList = shoppingList.find(item => item._id === item._id);
 
     const dispatch = useDispatch();
-    const {
-        _id,
+    let {
         name,
         price,
         link,
         specialNote,
-        claimed,
-        claimedBy
-    } = item;
+        isClaimed,
+        isClaimedBy
+    } = itemInShoppingList;
+    console.log(isClaimed);
+    console.log(isClaimedBy);
 
     const handleClaimGift = () => {
         console.log(name);
         console.log(state);
 
-        const itemInShoppingList = shoppingList.find(item => item._id === _id);
         console.log(itemInShoppingList);
 
         if (itemInShoppingList) {
             return;
         } else {
+            isClaimed = true;
+            isClaimedBy = 'Me';
+            
+
             dispatch({
                 type: ADD_TO_SHOPPING_LIST,
-                item: { ...item, claimed: true, claimedBy: 'Me' }
+                item: { ...item, isClaimed: isClaimed, isClaimedBy: isClaimedBy }
             });
 
             idbPromise('shopping list', 'put', {
                 ...item,
-                claimed: true,
-                claimedBy: 'Me'
-            })
+                isClaimed: isClaimed,
+                isClaimedBy: isClaimedBy
+            });
         }
     };
+
 
     return (
         <div className="container">
@@ -55,9 +61,9 @@ const SecretListItem = ({ item }) => {
                 <p>{specialNote}</p>
 
                 {/* ======= COME BACK TO THIS WHEN FRIEND FUNCTIONALITY IN PLACE ====== */}
-                {claimed ? (
+                {isClaimed ? (
                     <div>
-                        Claimed by: {claimedBy}
+                        Claimed by: {isClaimedBy}
                     </div>
                 ) : (
                     <div>

@@ -8,9 +8,6 @@ import ShoppingList from "../ShoppingList";
 const Home = () => {
     return (
         <div className="container">
-            <div>
-                Home says <span className="text-green">"hi!"</span>
-            </div>
 
 
             {/* =============== FOR TESTING PURPOSES ================= */}

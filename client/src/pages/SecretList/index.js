@@ -30,6 +30,10 @@ const SecretList = () => {
     return (
         <div className="container">
 
+    {/* ======= FOR TESTING ONLY ========================== */}
+            <h2 className='text-green'>Secret List</h2>
+    {/* ==================================================== */}
+
             {state.secretList.length ? (
                 <div>
                     {state.secretList.map(item => (
