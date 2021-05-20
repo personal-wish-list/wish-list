@@ -8,8 +8,11 @@ import { formatUrl } from '../../utils/helpers';
 
 const SecretListItem = ({ item }) => {
     const state = useSelector(state => state);
+    const { shoppingList } = state;
+
     const dispatch = useDispatch();
     const {
+        _id,
         name,
         price,
         link,
@@ -21,16 +24,24 @@ const SecretListItem = ({ item }) => {
     const handleClaimGift = () => {
         console.log(name);
         console.log(state);
-        dispatch({
-            type: ADD_TO_SHOPPING_LIST,
-            item: { ...item, claimed: true, claimedBy: 'Me' }
-        });
 
-        idbPromise('shopping list', 'put', {
-            ...item,
-            claimed: true,
-            claimedBy: 'Me'
-        })
+        const itemInShoppingList = shoppingList.find(item => item._id === _id);
+        console.log(itemInShoppingList);
+
+        if (itemInShoppingList) {
+            return;
+        } else {
+            dispatch({
+                type: ADD_TO_SHOPPING_LIST,
+                item: { ...item, claimed: true, claimedBy: 'Me' }
+            });
+
+            idbPromise('shopping list', 'put', {
+                ...item,
+                claimed: true,
+                claimedBy: 'Me'
+            })
+        }
     };
 
     return (
@@ -43,7 +54,7 @@ const SecretListItem = ({ item }) => {
                 <a href={link}>{formatUrl(link)}</a>
                 <p>{specialNote}</p>
 
-            {/* ======= COME BACK TO THIS WHEN FRIEND FUNCTIONALITY IN PLACE ====== */}
+                {/* ======= COME BACK TO THIS WHEN FRIEND FUNCTIONALITY IN PLACE ====== */}
                 {claimed ? (
                     <div>
                         Claimed by: {claimedBy}
@@ -58,8 +69,8 @@ const SecretListItem = ({ item }) => {
                         </button>
                     </div>
                 )}
-            {/* =================================================================== */}
-            
+                {/* =================================================================== */}
+
             </div>
         </div>
     );
