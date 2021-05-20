@@ -3,7 +3,7 @@ import './css/style.css';
 
 import { formatUrl } from '../../utils/helpers';
 
-const WishlistItem = ({ item }) => {
+const WishListItem = ({ item }) => {
     const {
         name,
         price,
@@ -25,4 +25,4 @@ const WishlistItem = ({ item }) => {
     );
 };
 
-export default WishlistItem;
+export default WishListItem;
