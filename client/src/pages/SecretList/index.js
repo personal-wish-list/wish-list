@@ -39,7 +39,7 @@ const SecretList = () => {
             ) : (
                 <div>
                     This user has everything they want!
-                    <span role='img' aria-label='gift'>
+                    <span role='img' aria-label='smiley'>
                         😃
                     </span>
                 </div>

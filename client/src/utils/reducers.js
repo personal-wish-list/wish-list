@@ -2,14 +2,15 @@ import {
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
     ADD_MULTIPLE_TO_SECRET_LIST,
-    ADD_TO_SHOPPING_LIST
+    ADD_TO_SHOPPING_LIST,
+    ADD_MULTIPLE_TO_SHOPPING_LIST
 } from './actions';
 
 const initialState = {
     wishlist: [],
     secretList: [],
     shoppingList: []
-}
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -40,7 +41,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 shoppingList: [...state.shoppingList, action.item]
-            }
+            };
+        
+        case ADD_MULTIPLE_TO_SHOPPING_LIST:
+            return {
+                ...state,
+                shoppingList: [...state.shoppingList, action.items]
+            };
         // =========== SHOPPING LIST CASES END
 
         // if it's none of these actions, do not update the state at all and keep things the same!
