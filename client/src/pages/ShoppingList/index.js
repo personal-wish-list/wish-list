@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import './css/style.css';
 
-import WishListItem from '../../components/WishListItem';
+import WishlistItem from '../../components/WishlistItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
@@ -25,6 +25,7 @@ const ShoppingList = () => {
         }
     }, [state.shoppingList.length, dispatch]);
 
+    console.log(state.shoppingList);
 
 
     return (
@@ -33,7 +34,7 @@ const ShoppingList = () => {
             {state.shoppingList.length ? (
                 <div>
                     {state.shoppingList.map(item => (
-                        <WishListItem key={item._id} item={item} />
+                        <WishlistItem key={item._id} item={item} />
                     ))}
                 </div>
             ) : (

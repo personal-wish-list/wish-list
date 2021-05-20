@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import './css/style.css';
 
 import AddItemForm from '../../components/AddItemForm';
-import WishListItem from '../../components/WishListItem';
+import WishlistItem from '../../components/WishlistItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
 import { ADD_MULTIPLE_TO_WISHLIST } from "../../utils/actions";
 
 
-const WishList = () => {
+const Wishlist = () => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ const WishList = () => {
             {state.wishlist.length ? (
                 <div>
                     {state.wishlist.map(item => (
-                        <WishListItem key={item._id} item={item} />
+                        <WishlistItem key={item._id} item={item} />
                     ))}
                 </div>
             ) : (
@@ -53,4 +53,4 @@ const WishList = () => {
     );
 };
 
-export default WishList;
+export default Wishlist;

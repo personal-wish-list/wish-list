@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
         case ADD_MULTIPLE_TO_SHOPPING_LIST:
             return {
                 ...state,
-                shoppingList: [...state.shoppingList, action.items]
+                shoppingList: [...state.shoppingList, ...action.items]
             };
         // =========== SHOPPING LIST CASES END
 
