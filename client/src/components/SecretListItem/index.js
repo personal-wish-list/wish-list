@@ -3,23 +3,22 @@ import './css/style.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
-import { ADD_TO_SHOPPING_LIST } from '../../utils/actions';
+import { ADD_TO_SHOPPING_LIST, UPDATE_SECRET_LIST_ITEM } from '../../utils/actions';
 import { formatUrl } from '../../utils/helpers';
 
 const SecretListItem = ({ item }) => {
     const state = useSelector(state => state);
     const { shoppingList } = state;
-    const itemInShoppingList = shoppingList.find(item => item._id === item._id);
-
     const dispatch = useDispatch();
     let {
+        _id,
         name,
         price,
         link,
         specialNote,
         isClaimed,
         isClaimedBy
-    } = itemInShoppingList;
+    } = item;
     console.log(isClaimed);
     console.log(isClaimedBy);
 
@@ -27,14 +26,15 @@ const SecretListItem = ({ item }) => {
         console.log(name);
         console.log(state);
 
+        const itemInShoppingList = shoppingList.find(item => item._id === _id);
         console.log(itemInShoppingList);
 
-        if (itemInShoppingList) {
-            return;
-        } else {
+        if (itemInShoppingList) return;
+        else {
             isClaimed = true;
+    // --- CHANGE TO FRIEND'S USERNAME ---------
             isClaimedBy = 'Me';
-            
+    // ---------------------------------------
 
             dispatch({
                 type: ADD_TO_SHOPPING_LIST,
@@ -42,6 +42,17 @@ const SecretListItem = ({ item }) => {
             });
 
             idbPromise('shopping list', 'put', {
+                ...item,
+                isClaimed: isClaimed,
+                isClaimedBy: isClaimedBy
+            });
+
+            dispatch({
+                type: UPDATE_SECRET_LIST_ITEM,
+                item: { ...item, isClaimed: isClaimed, isClaimedBy: isClaimedBy }
+            });
+
+            idbPromise('secret list', 'put', {
                 ...item,
                 isClaimed: isClaimed,
                 isClaimedBy: isClaimedBy
