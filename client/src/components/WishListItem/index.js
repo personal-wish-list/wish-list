@@ -3,7 +3,7 @@ import './css/style.css';
 
 import { formatUrl } from '../../utils/helpers';
 
-const ListItem = ({ item }) => {
+const WishListItem = ({ item }) => {
     const {
         name,
         price,
@@ -13,7 +13,7 @@ const ListItem = ({ item }) => {
 
     return (
         <div className="container">
-            <div>
+            <div className="wishlist-item">
                 <h3>
                     {name}
                     <span> ${price}</span>
@@ -25,4 +25,4 @@ const ListItem = ({ item }) => {
     );
 };
 
-export default ListItem;
+export default WishListItem;

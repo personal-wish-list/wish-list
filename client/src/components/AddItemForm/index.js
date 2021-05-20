@@ -3,7 +3,7 @@ import './css/style.css';
 
 import { useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/idb";
-import { ADD_TO_WISHLIST } from "../../utils/actions";
+import { ADD_TO_SECRET_LIST, ADD_TO_WISHLIST } from "../../utils/actions";
 
 const AddItemForm = () => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const AddItemForm = () => {
             isClaimed: false,
             isClaimedBy: ''
         });
-    const {
+    let {
         _id,
         name,
         link,
@@ -36,18 +36,22 @@ const AddItemForm = () => {
             type: ADD_TO_WISHLIST,
             item: { ...formState }
         });
+        idbPromise('wishlist', 'put', {
+            ...formState,
+            isClaimed: isClaimed,
+            isClaimedBy: isClaimedBy
+        });
 
+        dispatch({
+            type: ADD_TO_SECRET_LIST,
+            item: { ...formState }
+        });
         idbPromise('secret list', 'put', {
             ...formState,
             isClaimed: isClaimed,
             isClaimedBy: isClaimedBy
         });
 
-        idbPromise('wishlist', 'put', {
-            ...formState,
-            isClaimed: isClaimed,
-            isClaimedBy: isClaimedBy
-        });
     };
 
     const handleChange = e => {
