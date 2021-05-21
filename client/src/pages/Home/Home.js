@@ -1,9 +1,8 @@
 import React from "react";
-import './css/style.css';
 
-import WishList from '../WishList';
-import SecretList from '../SecretList';
-import ShoppingList from "../ShoppingList";
+import WishList from '../WishList/WishList';
+import SecretList from '../SecretList/SecretList';
+import ShoppingList from "../ShoppingList/ShoppingList";
 
 const Home = () => {
     return (

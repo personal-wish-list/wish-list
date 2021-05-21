@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import './css/style.css';
+import './wishlist.css';
 
-import AddItemForm from '../../components/AddItemForm';
-import WishListItem from '../../components/WishListItem';
+import AddItemForm from '../../components/AddItemForm/AddItemForm';
+import WishListItem from '../../components/WishListItem/WishListItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
