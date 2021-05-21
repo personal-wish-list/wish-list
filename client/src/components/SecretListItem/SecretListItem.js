@@ -1,5 +1,5 @@
 import React from "react";
-import './css/style.css';
+import './secret-list-item.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';

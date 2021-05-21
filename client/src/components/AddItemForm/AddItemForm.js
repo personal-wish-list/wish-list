@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './css/style.css';
+import './add-item-form.css';
 
 import { useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/idb";
