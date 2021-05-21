@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Table } from 'semantic-ui-react';
 import './wishlist.css';
 
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
@@ -39,6 +40,19 @@ const WishList = () => {
             
             <AddItemForm />
 
+            <Table celled>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Item</Table.HeaderCell>
+                        <Table.HeaderCell>Price</Table.HeaderCell>
+                        <Table.HeaderCell>Link</Table.HeaderCell>
+                        <Table.HeaderCell>Note</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+            </Table>
+
+            <Table.Body>
+
             {state.wishlist.length ? (
                 <div>
                     {state.wishlist.map(item => (
@@ -53,6 +67,8 @@ const WishList = () => {
                     Add items to your wishlist if you want gifts
                 </div>
             )}
+
+            </Table.Body>
 
         </div>
     );
