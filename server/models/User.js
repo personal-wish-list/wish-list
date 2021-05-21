@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
-const Item = require('./Item');
-
-// if it's called WishList
-// const WishList = require('./WishList');
+const WishList = require('./WishList');
 
 const userSchema = new Schema({
   firstName: {
@@ -34,7 +31,7 @@ const userSchema = new Schema({
       ref: 'User'
     }
   ],
-  wishList: [Item.schema]
+  lists: [WishList.schema]
 });
 
 // set up pre-save middleware to create password
