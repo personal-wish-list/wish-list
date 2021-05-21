@@ -1,13 +1,15 @@
 import {
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
+    UPDATE_WISHLIST_ITEM,
 
     ADD_TO_SECRET_LIST,
     ADD_MULTIPLE_TO_SECRET_LIST,
     UPDATE_SECRET_LIST_ITEM,
 
     ADD_TO_SHOPPING_LIST,
-    ADD_MULTIPLE_TO_SHOPPING_LIST
+    ADD_MULTIPLE_TO_SHOPPING_LIST,
+    UPDATE_SHOPPING_LIST_ITEM
 } from './actions';
 
 const initialState = {
@@ -29,6 +31,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 wishlist: [...state.wishlist, ...action.items]
+            };
+
+        case UPDATE_WISHLIST_ITEM:
+            return {
+                ...state,
+                wishlist: [...state.wishlist, action.item]
             };
         // ============ WISHLIST CASES END =======================================================
 
@@ -64,7 +72,13 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 shoppingList: [...state.shoppingList, ...action.items]
             };
-        // =========== SHOPPING LIST CASES END
+
+        case UPDATE_SHOPPING_LIST_ITEM:
+            return {
+                ...state,
+                shoppingList: [...state.shoppingList, action.item]
+            };
+        // =========== SHOPPING LIST CASES END ========================================================
 
         // if it's none of these actions, do not update the state at all and keep things the same!
         default:

@@ -2,16 +2,26 @@ import React, { useState } from "react";
 import ContentEditable from 'react-contenteditable';
 import './wishlist-item.css';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { idbPromise } from '../../utils/idb';
+import {
+    UPDATE_WISHLIST_ITEM,
+    UPDATE_SECRET_LIST_ITEM,
+    UPDATE_SHOPPING_LIST_ITEM
+} from '../../utils/actions';
 import { formatUrl } from '../../utils/helpers';
 
 const WishListItem = ({ item }) => {
-    const [isEditing, setIsEditing] = useState(false);
     let {
+        _id,
         name,
         price,
         link,
         specialNote
     } = item;
+    const [isEditing, setIsEditing] = useState(false);
+    const { wishlist, secretList, shoppingList } = useSelector(state => state);
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         const {
@@ -21,7 +31,10 @@ const WishListItem = ({ item }) => {
             target: { value }
         } = e;
 
-        console.log(`${column}: ${value}`);
+        item = {
+            ...item,
+            [column]: value
+        };
     };
 
     const handleEdit = () => {
@@ -29,8 +42,45 @@ const WishListItem = ({ item }) => {
         setIsEditing(true);
     }
 
-    const handleSave = () => {
-        console.log(`${name} saved!`);
+    const handleSave = (id) => {
+        const itemInWishlist = wishlist.find(item => item._id === id);
+        const itemInSecretList = secretList.find(item => item._id === id);
+        const itemInShoppingList = shoppingList.find(item => item._id === id);
+
+        // update item in wishlist
+        if (itemInWishlist) {
+            dispatch({
+                type: UPDATE_WISHLIST_ITEM,
+                item: { ...itemInWishlist }
+            });
+            idbPromise('wishlist', 'put', {
+                ...itemInWishlist
+            });
+        }
+
+        // update item in secret list
+        if (itemInSecretList) {
+            dispatch({
+                type: UPDATE_SECRET_LIST_ITEM,
+                item: { ...itemInWishlist }
+            });
+            idbPromise('wishlist', 'put', {
+                ...itemInWishlist
+            });
+        }
+
+        // update item in shopping list
+        if (itemInShoppingList) {
+            dispatch({
+                type: UPDATE_SHOPPING_LIST_ITEM,
+                item: { ...itemInWishlist }
+            });
+            idbPromise('wishlist', 'put', {
+                ...itemInWishlist
+            });
+        }
+
+        // console.log(itemState);
         setIsEditing(false);
     }
 
@@ -55,11 +105,11 @@ const WishListItem = ({ item }) => {
                     <strong>
                         <span>$
                         <ContentEditable
-                            html={`${price}`}
-                            data-column='price'
-                            className='content-editable'
-                            onChange={handleChange}
-                        />
+                                html={`${price}`}
+                                data-column='price'
+                                className='content-editable'
+                                onChange={handleChange}
+                            />
                         </span>
                     </strong>
 
@@ -78,7 +128,7 @@ const WishListItem = ({ item }) => {
                     />
 
                     <div>
-                        <button onClick={handleSave}>Save</button>
+                        <button onClick={() => handleSave(_id)}>Save</button>
                         <button onClick={handleDelete}>Delete</button>
                     </div>
                 </div>
