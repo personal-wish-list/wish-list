@@ -25,8 +25,7 @@ const ShoppingList = () => {
         }
     }, [state.shoppingList.length, dispatch]);
 
-    console.log(state.shoppingList);
-
+    
 
     return (
         <div className="container">

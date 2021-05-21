@@ -1,12 +1,11 @@
-import React from "react";
-// import ReactDOM from 'react-dom';
-import { Table } from "semantic-ui-react";
+import React, { useState } from "react";
 import ContentEditable from 'react-contenteditable';
 import './wishlist-item.css';
 
 import { formatUrl } from '../../utils/helpers';
 
 const WishListItem = ({ item }) => {
+    const [isEditing, setIsEditing] = useState(false);
     let {
         name,
         price,
@@ -25,79 +24,88 @@ const WishListItem = ({ item }) => {
         console.log(`${column}: ${value}`);
     };
 
-    // const handleEdit = (e) => {
-    //     const {
+    const handleEdit = () => {
+        console.log(`editing ${name}...`)
+        setIsEditing(true);
+    }
 
-    //     }
-    // };
+    const handleSave = () => {
+        console.log(`${name} saved!`);
+        setIsEditing(false);
+    }
 
     const handleDelete = () => {
         console.log(`${name} deleted!`)
     };
 
+    if (isEditing) {
+        return (
+            <div className="container">
+                <div className="wishlist-item">
 
-    return (
-        <Table.Row>
-            <Table.Cell>
-                <ContentEditable
-                    html={name}
-                    data-column='name'
-                    className='content-editable item-name'
-                    onChange={handleChange}
-                />
-            </Table.Cell>
-            <Table.Cell>
-                <ContentEditable
-                    html={`$${price}`}
-                    data-column='price'
-                    className='content-editable item-price'
-                    onChange={handleChange}
-                />
-            </Table.Cell>
-            <Table.Cell>
-                <a href={link} target='_blank' rel='noreferrer'>
+                    <strong>
+                        <ContentEditable
+                            html={name}
+                            data-column='name'
+                            className='content-editable'
+                            onChange={handleChange}
+                        />
+                    </strong>
+
+                    <strong>
+                        <span>$
+                        <ContentEditable
+                            html={`${price}`}
+                            data-column='price'
+                            className='content-editable'
+                            onChange={handleChange}
+                        />
+                        </span>
+                    </strong>
+
                     <ContentEditable
-                        html={formatUrl(link)}
-                        data-column='name'
-                        className='content-editable item-link'
+                        html={link}
+                        data-column='link'
+                        className='content-editable'
                         onChange={handleChange}
                     />
-                </a>
-            </Table.Cell>
-            <Table.Cell>
-                <ContentEditable
-                    html={specialNote}
-                    data-column='specialNote'
-                    className='content-editable item-note'
-                    onChange={handleChange}
-                />
-            </Table.Cell>
-            <Table.Cell>
-                <button onClick={handleDelete}>Delete</button>
-            </Table.Cell>
-        </Table.Row>
-    )
 
-    // return (
-    //     <div className="container">
-    //         <div className="wishlist-item">
-    //             <h3>
-    //                 <ContentEditable
-    //                     html={name}
-    //                     className='content-editable'
-    //                     onChange={handleEdit}
-    //                 />
-    //             </h3>
-    //             <h4>${price}</h4>
-    //             <a href={link}>{formatUrl(link)}</a>
-    //             <p>{specialNote}</p>
-    //             <div>
-    //                 {/* <button onClick={handleEdit}>Edit</button> */}
-    //                 <button onClick={handleDelete}>Delete</button>
-    //             </div>
-    //         </div>
-    //     </div>
-    // );
+                    <ContentEditable
+                        html={specialNote}
+                        data-column='specialNote'
+                        className='content-editable'
+                        onChange={handleChange}
+                    />
+
+                    <div>
+                        <button onClick={handleSave}>Save</button>
+                        <button onClick={handleDelete}>Delete</button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+
+    return (
+        <div className="container">
+            <div className="wishlist-item">
+
+                <h3>{name}</h3>
+
+                <h4>${price}</h4>
+
+                <a href={link} target='_blank' rel='noreferrer' className='item-link'>{formatUrl(link)}</a>
+
+                <p>{specialNote}</p>
+
+                <div>
+                    <button onClick={handleEdit}>Edit</button>
+                    <button onClick={handleDelete}>Delete</button>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default WishListItem;
