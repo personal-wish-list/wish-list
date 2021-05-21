@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import './css/style.css';
+import './secret-list.css';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
 import { ADD_MULTIPLE_TO_SECRET_LIST } from "../../utils/actions";
 
-import SecretListItem from '../../components/SecretListItem';
+import SecretListItem from '../../components/SecretListItem/SecretListItem';
 
 const SecretList = () => {
     const state = useSelector(state => state);

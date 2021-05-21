@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import './css/style.css';
+import './shopping-list.css';
 
-import WishListItem from '../../components/WishListItem';
+import WishListItem from '../../components/WishListItem/WishListItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';

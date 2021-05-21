@@ -1,5 +1,5 @@
 import React from "react";
-import './css/style.css';
+import './wishlist-item.css';
 
 import { formatUrl } from '../../utils/helpers';
 
