@@ -6,7 +6,17 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    gifts: [Gift]
+    friends: [User]
+    wishList: [Item]
+  }
+
+  type Item {
+    _id: ID
+    name: String!
+    link: String!
+    specialNote: String
+    price: Int!
+    isClaimed: Boolean
   }
 
   type Auth {
@@ -17,8 +27,6 @@ const typeDefs = gql`
   type Checkout {
     session: ID
   }
-
-  
 
   type Query {
     user: User
