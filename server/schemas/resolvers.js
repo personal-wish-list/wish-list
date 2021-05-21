@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, WishList } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -13,7 +13,17 @@ const resolvers = {
           .populate('friends')
           .populate('wishlist');
 
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+        return user;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    users: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.find()
+          .populate('friends')
+          .populate('wishlist');
 
         return user;
       }
@@ -94,7 +104,24 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    addWishList: async (parent, { name, month, items }, context) => {
+      if (context.user) {
+        const list = new WishList({ name, month, items });
+
+        await User.findByIdAndUpdate(context.user._id, { $push: { lists: list } });
+
+        return list;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    updateWishList: async (parent, { _id, input }, context) => {
+      return await WishList.findByIdAndUpdate(_id,
+        { items: input },
+        { new: true })
+    },
   }
 };
 
