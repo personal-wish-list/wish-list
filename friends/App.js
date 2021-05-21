@@ -27,9 +27,7 @@ function App() {
           id={friend.id}
           key={friend.id}
           name={friend.name}
-          image={friend.image}
-          occupation={friend.occupation}
-          location={friend.location}
+          username={friend.username}
         />
       ))}
     </Wrapper>
