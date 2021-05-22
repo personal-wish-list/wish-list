@@ -1,6 +1,7 @@
 import {
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
+    SORT_WISHLIST_ALPHABETICALLY,
     SORT_WISHLIST_PRICE_ASC,
     SORT_WISHLIST_PRICE_DESC,
     UPDATE_WISHLIST_ITEM,
@@ -37,6 +38,18 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 wishlist: [...state.wishlist, ...action.items]
             };
+        
+        case SORT_WISHLIST_ALPHABETICALLY:
+            let abcWishlist = state.wishlist.sort((a, b) => {
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                return 0;
+            });
+
+            return {
+                ...state,
+                wishlist: abcWishlist
+            }
 
         case SORT_WISHLIST_PRICE_ASC:
             let priceAscWishlist = state.wishlist.sort((a, b) => {
