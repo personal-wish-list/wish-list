@@ -7,7 +7,10 @@ import { idbPromise } from '../../utils/idb';
 import {
     UPDATE_WISHLIST_ITEM,
     UPDATE_SECRET_LIST_ITEM,
-    UPDATE_SHOPPING_LIST_ITEM
+    UPDATE_SHOPPING_LIST_ITEM,
+    REMOVE_FROM_WISHLIST,
+    REMOVE_FROM_SECRET_LIST,
+    REMOVE_FROM_SHOPPING_LIST
 } from '../../utils/actions';
 import { formatUrl } from '../../utils/helpers';
 
@@ -51,10 +54,10 @@ const WishListItem = ({ item }) => {
         if (itemInWishlist) {
             dispatch({
                 type: UPDATE_WISHLIST_ITEM,
-                item: { ...itemInWishlist }
+                item: { ...item }
             });
             idbPromise('wishlist', 'put', {
-                ...itemInWishlist
+                ...item
             });
         }
 
@@ -62,10 +65,10 @@ const WishListItem = ({ item }) => {
         if (itemInSecretList) {
             dispatch({
                 type: UPDATE_SECRET_LIST_ITEM,
-                item: { ...itemInWishlist }
+                item: { ...item }
             });
-            idbPromise('wishlist', 'put', {
-                ...itemInWishlist
+            idbPromise('secret list', 'put', {
+                ...item
             });
         }
 
@@ -73,18 +76,50 @@ const WishListItem = ({ item }) => {
         if (itemInShoppingList) {
             dispatch({
                 type: UPDATE_SHOPPING_LIST_ITEM,
+                item: { ...item }
+            });
+            idbPromise('shopping list', 'put', {
+                ...item
+            });
+        }
+
+        setIsEditing(false);
+    }
+
+    const handleDelete = (id) => {
+        const itemInWishlist = wishlist.find(item => item._id === id);
+        const itemInShoppingList = shoppingList.find(item => item._id === id);
+
+        // remove from wishlist and secret list
+        if (itemInWishlist) {
+            dispatch({
+                type: REMOVE_FROM_WISHLIST,
                 item: { ...itemInWishlist }
             });
-            idbPromise('wishlist', 'put', {
+            idbPromise('wishlist', 'delete', {
+                ...itemInWishlist
+            });
+
+            dispatch({
+                type: REMOVE_FROM_SECRET_LIST,
+                item: { ...itemInWishlist }
+            });
+            idbPromise('secret list', 'delete', {
                 ...itemInWishlist
             });
         }
 
-        // console.log(itemState);
-        setIsEditing(false);
-    }
+        // remove from shopping list
+        if (itemInShoppingList) {
+            dispatch({
+                type: REMOVE_FROM_SHOPPING_LIST,
+                item: { ...itemInShoppingList }
+            });
+            idbPromise('shopping list', 'delete', {
+                ...itemInShoppingList
+            });
+        }
 
-    const handleDelete = () => {
         console.log(`${name} deleted!`)
     };
 
@@ -129,7 +164,7 @@ const WishListItem = ({ item }) => {
 
                     <div>
                         <button onClick={() => handleSave(_id)}>Save</button>
-                        <button onClick={handleDelete}>Delete</button>
+                        <button onClick={() => handleDelete(_id)}>Delete</button>
                     </div>
                 </div>
             </div>
@@ -151,7 +186,7 @@ const WishListItem = ({ item }) => {
 
                 <div>
                     <button onClick={handleEdit}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={() => handleDelete(_id)}>Delete</button>
                 </div>
             </div>
         </div>
