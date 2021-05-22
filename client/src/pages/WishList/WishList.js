@@ -6,7 +6,11 @@ import WishListItem from '../../components/WishListItem/WishListItem';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
-import { ADD_MULTIPLE_TO_WISHLIST } from "../../utils/actions";
+import {
+    ADD_MULTIPLE_TO_WISHLIST,
+    SORT_WISHLIST_PRICE_ASC,
+    SORT_WISHLIST_PRICE_DESC
+} from "../../utils/actions";
 
 
 const WishList = () => {
@@ -27,7 +31,27 @@ const WishList = () => {
         }
     }, [state.wishlist.length, dispatch]);
 
+    const sortPriceAscending = () => {
+        state.wishlist.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
 
+        dispatch({
+            type: SORT_WISHLIST_PRICE_ASC,
+            wishlist: [state.wishlist]
+        });
+        console.log(state.wishlist);
+
+    };
+
+    const sortPriceDescending = () => {
+        state.wishlist.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+
+        dispatch({
+            type: SORT_WISHLIST_PRICE_DESC,
+            wishlist: [state.wishlist]
+        });
+        console.log(state.wishlist);
+
+    };
 
     return (
         <div className="container">
@@ -39,8 +63,12 @@ const WishList = () => {
 
             <AddItemForm />
 
+
             {state.wishlist.length ? (
                 <div>
+                    <button onClick={sortPriceAscending}>Sort by price</button>
+                    <button onClick={sortPriceDescending}>Sort reverse by price</button>
+
                     {state.wishlist.map(item => (
                         <WishListItem key={item._id} item={item} />
                     ))}
