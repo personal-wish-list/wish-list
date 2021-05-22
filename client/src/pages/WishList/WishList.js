@@ -27,16 +27,16 @@ const WishList = () => {
         }
     }, [state.wishlist.length, dispatch]);
 
-    
+
 
     return (
         <div className="container">
 
-    {/* ======= FOR TESTING ONLY ========================== */}
-                <h2 className='text-green'>Wishlist</h2>
-    {/* ==================================================== */}
+            {/* ======= FOR TESTING ONLY ========================== */}
+            <h2 className='text-green'>Wishlist</h2>
+            {/* ==================================================== */}
 
-            
+
             <AddItemForm />
 
             {state.wishlist.length ? (
@@ -49,8 +49,8 @@ const WishList = () => {
                 <div>
                     <span role='img' aria-label='gift'>
                         🎁
-                    </span>
-                    Add items to your wishlist if you want gifts
+                            </span>
+                            Add items to your wishlist if you want gifts
                 </div>
             )}
 
