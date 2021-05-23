@@ -10,27 +10,31 @@ import {
 import SecretListItem from '../../components/SecretListItem/SecretListItem';
 
 const SecretList = () => {
-    const state = useSelector(state => state);
+    const secretList = useSelector(state => state.secretList);
     const dispatch = useDispatch();
+    const [filteredList, setFilteredList] = useState(secretList);
     const [isFiltering, setIsFiltering] = useState(false);
-    const [priceMin, setPriceMin] = useState(0);
-    const [priceMax, setPriceMax] = useState(100);
-
-    const getSecretList = async () => {
-        const secretList = await idbPromise('secret list', 'get');
-        dispatch({
-            type: ADD_MULTIPLE_TO_SECRET_LIST,
-            items: [...secretList]
-        });
-    }
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(100);
 
     useEffect(() => {
-        if (!state.secretList.length) {
+        const getSecretList = async () => {
+            const idbSecretList = await idbPromise('secret list', 'get');
+            dispatch({
+                type: ADD_MULTIPLE_TO_SECRET_LIST,
+                items: [...idbSecretList]
+            });
+        }    
+
+        if (!secretList.length) {
             getSecretList();
         }
-    }, [state.secretList.length, dispatch]);
+    }, [secretList.length, dispatch]);
 
-    const handleChange = e => {
+    const handleFilterChange = e => {
+        setFilteredList(secretList);
+        setIsFiltering(true);
+
         let {
             currentTarget: {
                 dataset: { column },
@@ -38,26 +42,21 @@ const SecretList = () => {
             target: { value }
         } = e;
 
-        console.log(`${column}: ${value}`);
-        if (column === 'priceMin') setPriceMin(parseInt(value));
-        if (column === 'priceMax') setPriceMax(parseInt(value));
-    };
+        if (column === 'minPrice') setMinPrice(parseInt(value));
+        if (column === 'maxPrice') setMaxPrice(parseInt(value));
 
-    const filterByPrice = (min, max) => {
-        setIsFiltering(true);
-        const priceFilteredList = state.secretList.filter(item => {
-            return item.price >= min && item.price <= max;
+        const priceFilteredList = secretList.filter(item => {
+            return item.price >= minPrice && item.price <= maxPrice;
         });
 
-        console.log(priceFilteredList);
-
-        state.secretList = priceFilteredList;
+        setFilteredList(priceFilteredList);
     };
 
     const stopFiltering = async () => {
         setIsFiltering(false);
-
-        getSecretList();
+        setMinPrice(0);
+        setMaxPrice(100);
+        setFilteredList(secretList);
     };
 
     return (
@@ -68,41 +67,46 @@ const SecretList = () => {
             {/* ==================================================== */}
 
             <div>
-                <label htmlFor='priceMin'>Min Price: $</label>
+                <label htmlFor='minPrice'>Min Price: $</label>
                 <input
                     type='number'
                     min='0'
-                    name='priceMin'
-                    data-column='priceMin'
-                    value={priceMin}
-                    onChange={handleChange}
+                    max={maxPrice}
+                    name='minPrice'
+                    data-column='minPrice'
+                    value={minPrice}
+                    onChange={handleFilterChange}
+                    onFocus={handleFilterChange}
+                    onBlur={handleFilterChange}
                 />
             </div>
             <div>
-                <label htmlFor='priceMax'>Max Price: $</label>
+                <label htmlFor='maxPrice'>Max Price: $</label>
                 <input
                     type='number'
-                    name='priceMax'
-                    data-column='priceMax'
-                    value={priceMax}
-                    onChange={handleChange}
+                    min={minPrice}
+                    name='maxPrice'
+                    data-column='maxPrice'
+                    value={maxPrice}
+                    onChange={handleFilterChange}
+                    onFocus={handleFilterChange}
+                    onBlur={handleFilterChange}
                 />
             </div>
-            <button onClick={() => filterByPrice(priceMin, priceMax)}>Filter</button>
             <button onClick={stopFiltering}>Clear Filters</button>
 
             {isFiltering ? (
                 <div>
-                    {state.secretList.map(item => (
+                    {filteredList.map(item => (
                         <SecretListItem key={item._id} item={item} />
                     ))}
                 </div>
             ) : (
                 <div>
                     {
-                        state.secretList.length ? (
+                        secretList.length ? (
                             <div>
-                                {state.secretList.map(item => (
+                                {secretList.map(item => (
                                     <SecretListItem key={item._id} item={item} />
                                 ))}
                             </div>
