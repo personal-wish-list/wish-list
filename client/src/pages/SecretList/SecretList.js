@@ -10,15 +10,21 @@ import {
 import SecretListItem from '../../components/SecretListItem/SecretListItem';
 
 const SecretList = () => {
+    // getting the secret list
     const secretList = useSelector(state => state.secretList);
+
     const dispatch = useDispatch();
+
+    // if filtering, we'll render a filtered list
     const [filteredList, setFilteredList] = useState(secretList);
     const [isFiltering, setIsFiltering] = useState(false);
+    // parameters for filtering
     const [minPrice, setMinPrice] = useState(0);
-    const [maxPrice, setMaxPrice] = useState(100);
+    const [maxPrice, setMaxPrice] = useState(500);
 
     useEffect(() => {
         const getSecretList = async () => {
+            // this will get secret list if offline
             const idbSecretList = await idbPromise('secret list', 'get');
             dispatch({
                 type: ADD_MULTIPLE_TO_SECRET_LIST,
@@ -52,11 +58,29 @@ const SecretList = () => {
         setFilteredList(priceFilteredList);
     };
 
-    const stopFiltering = async () => {
+    // reset filters
+    const stopFiltering = () => {
         setIsFiltering(false);
         setMinPrice(0);
         setMaxPrice(100);
         setFilteredList(secretList);
+    };
+
+    const chooseRandomGift = async () => {
+        setIsFiltering(true);
+
+        // console logs before and after the filter function return the same filteredList
+        setFilteredList(secretList);
+        console.log(filteredList);
+        setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice));
+        console.log(filteredList);
+
+        // random function
+        const randomGift = filteredList[Math.floor(Math.random() * filteredList.length)];
+        console.log(randomGift);
+
+        // array with only randomGift inside
+        setFilteredList([randomGift]);
     };
 
     return (
@@ -94,14 +118,24 @@ const SecretList = () => {
                 />
             </div>
             <button onClick={stopFiltering}>Clear Filters</button>
+            <button 
+                onClick={() => {
+                    // this looks crazy because we may need to add another function...
+                    chooseRandomGift();
+                }}
+            >
+                Select Random Gift!
+            </button>
 
             {isFiltering ? (
+                // if isFiltering render this
                 <div>
                     {filteredList.map(item => (
                         <SecretListItem key={item._id} item={item} />
                     ))}
                 </div>
             ) : (
+                // else render this
                 <div>
                     {
                         secretList.length ? (
@@ -115,7 +149,7 @@ const SecretList = () => {
                                 This user has everything they want!
                                 <span role='img' aria-label='smiley'>
                                     😃
-                        </span>
+                                </span>
                             </div>
                         )
                     }
