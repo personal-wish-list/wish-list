@@ -13,6 +13,16 @@ const WishListSchema = new Schema({
         validate: (value => ((value <= 12) && (value > 0))),
         required: true
     },
+    day: {
+        type: Number,
+        validate: (value => ((value <= 31) && (value > 0))),
+        required: true
+    },
+    year: {
+        type: Number,
+        validate: (value => ((value <= Date.now) && (value > 1900))),
+        required: true
+    },
     items: [
         {
             type: Schema.Types.ObjectId,

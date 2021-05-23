@@ -5,6 +5,8 @@ const typeDefs = gql`
     _id: ID!
     name: String!
     month: Int!
+    day: Int!
+    year: Int!
     items: [Item]
   }
 
@@ -53,7 +55,7 @@ const typeDefs = gql`
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
     addFriend(friendId: ID!): User
-    addWishList(name: String!, month: Int!, items: [ID]): WishList
+    addWishList(name: String!, month: Int!, day: Int!, year: Int!, items: [ID]): WishList
     updateWishList(_id: ID!, input: ItemInput!): WishList
   }
 `;
