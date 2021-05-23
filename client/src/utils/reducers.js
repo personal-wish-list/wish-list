@@ -98,7 +98,7 @@ const reducer = (state = initialState, action) => {
         case ADD_MULTIPLE_TO_SECRET_LIST:
             return {
                 ...state,
-                secretList: [...state.secretList, ...action.items]
+                secretList: [...action.items]
             };
 
         case UPDATE_SECRET_LIST_ITEM:
