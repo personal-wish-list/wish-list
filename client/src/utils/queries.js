@@ -2,17 +2,21 @@ import gql from 'graphql-tag';
 
 export const QUERY_USER = gql`
 {
-  user {
-    firstName
-    lastName
+    user {
+    _id
+    email
     friends{
+      _id
       firstName
-      lastName
-      email
     }
-    wishList {
+    lists{
       _id
       name
+      items{
+        _id
+        name
+        link
+      }
     }
   }
 }

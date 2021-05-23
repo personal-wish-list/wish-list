@@ -35,3 +35,21 @@ mutation addFriend($friendId: ID!) {
     }
   }
 }`
+
+export const ADD_WISHLIST = gql`
+mutation addWishList($name: String!, $month: Int!, $day: Int!, $year: Int!, $items: [ItemInput]!){
+  addWishList(name: $name, month: $month, day: $day, year: $year, items: $items){
+    _id
+    name
+    month
+    day
+    year
+    items{
+      name
+      link
+      specialNote
+      price
+      isClaimed
+    }
+    }
+  }`

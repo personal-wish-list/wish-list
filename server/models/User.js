@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const WishList = require('./WishList');
 
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
-const WishList = require('./WishList');
+
 
 const userSchema = new Schema({
   firstName: {
@@ -18,7 +19,8 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    match: [/.+@.+\..+/, 'Must match an email address!']
   },
   password: {
     type: String,

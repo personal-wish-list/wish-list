@@ -1,8 +1,10 @@
 const db = require('./connection');
-const { User } = require('../models');
+const { User, WishList, Item } = require('../models');
 
 db.once('open', async () => {
 
+    await WishList.deleteMany();
+    await Item.deleteMany();
     await User.deleteMany();
 
     await User.create({
