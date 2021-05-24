@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import { Provider } from 'react-redux';
 import store from './utils/store';
 import Navbar from './components/Navbar';
