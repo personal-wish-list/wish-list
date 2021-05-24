@@ -30,7 +30,7 @@ const SecretList = () => {
                 type: ADD_MULTIPLE_TO_SECRET_LIST,
                 items: [...idbSecretList]
             });
-        }    
+        }
 
         if (!secretList.length) {
             getSecretList();
@@ -72,7 +72,7 @@ const SecretList = () => {
         // console logs before and after the filter function return the same filteredList
         setFilteredList(secretList);
         console.log(filteredList);
-        setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice));
+        setFilteredList(secretList.filter(item => (item.price >= minPrice && item.price <= maxPrice)));
         console.log(filteredList);
 
         // random function
@@ -118,7 +118,7 @@ const SecretList = () => {
                 />
             </div>
             <button onClick={stopFiltering}>Clear Filters</button>
-            <button 
+            <button
                 onClick={() => {
                     // this looks crazy because we may need to add another function...
                     chooseRandomGift();
@@ -130,9 +130,22 @@ const SecretList = () => {
             {isFiltering ? (
                 // if isFiltering render this
                 <div>
-                    {filteredList.map(item => (
-                        <SecretListItem key={item._id} item={item} />
-                    ))}
+                    {
+                        filteredList.length ? (
+                            <div>
+                                {filteredList.map(item => (
+                                    <SecretListItem key={item._id} item={item} />
+                                ))}
+                            </div>
+                        ) : (
+                            <div>
+                                No more gifts to buy!
+                                <span role='img' aria-label='smiley'>
+                                    😃
+                                </span>
+                            </div>
+                        )
+                    }
                 </div>
             ) : (
                 // else render this
