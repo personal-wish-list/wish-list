@@ -1,64 +1,79 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import SignUpForm from '../SignupForm';
+import LoginForm from '../LoginForm';
 import './css/style.css';
-import { Button } from '../Button';
 
+import Auth from '../../utils/auth';
 
-function Navbar() {
-    const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);
+const AppNavbar = () => {
+  // set modal display state
+  const [showModal, setShowModal] = useState(false);
 
-    const handleClick = () => setClick(!click);
-    const closeMobileMenu = () => setClick(false);
+  return (
+    <>
+      <Navbar class = 'navbar' bg='dark' variant='dark' expand='lg'>
+        <Container fluid>
+          <Navbar.Brand className = "navbar-logo" as={Link} to='/'>
+            Wish-List &nbsp;
+                <i class="fas fa-gift"/> 
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls='navbar' />
+          <Navbar.Collapse id='navbar'>
+            <Nav className='ml-auto, navbar'>
+              <Nav.Link className = 'nav-links' as={Link} to='/'>
+                DashBoard
+              </Nav.Link>
+              {/* if user is logged in show saved books and logout */}
+              {Auth.loggedIn() ? (
+                <>
+                  <Nav.Link className = 'nav-links' as={Link} to='/saved'>
+                    DashBoard
+                  </Nav.Link>
+                  <Nav.Link className = 'nav-links' onClick={Auth.logout}>Logout</Nav.Link>
+                </>
+              ) : (
+                <Nav.Link className = 'nav-links' onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      {/* set modal data up */}
+      <Modal
+        size='lg'
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        aria-labelledby='signup-modal'>
+        {/* tab container to do either signup or login component */}
+        <Tab.Container defaultActiveKey='login'>
+          <Modal.Header closeButton>
+            <Modal.Title id='signup-modal'>
+              <Nav variant='pills'>
+                <Nav.Item>
+                  <Nav.Link eventKey='login'>Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey='login'>
+                <LoginForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey='signup'>
+                <SignUpForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+      </Modal>
+    </>
+  );
+};
 
-    const showButton = () => {
-        if(window.innerWidth <= 960) {
-            setButton(false)
-        } else {
-            setButton(true);
-        }
-    };
-
-    useEffect(() => {
-        showButton();
-    }, []);
-
-    window.addEventListener('resize', showButton);
-
-    return (
-        <>
-            <nav className = "navbar">
-                <div className = "navbar-container">
-                    <Link to ='/' className = "navbar-logo" onClick = {closeMobileMenu}>
-                        Wish-List &nbsp;
-                        <i class="fas fa-gift"/>
-                    </Link>
-                    <div className = "menu-icon" onClick = {handleClick}>
-                        <i className = {click ? 'fas fa-times' : 'fas fa-bars'} />
-                    </div>
-                    <ul className = {click ? 'nav-menu active' : 'nav-menu'}>
-                        <li className = 'nav-item'>
-                            <Link to ='/' className = 'nav-links' onClick = {closeMobileMenu}>
-                                Home
-                            </Link>
-                        </li>
-                        <li className = 'nav-item'>
-                            <Link to ='/dashboard' className = 'nav-links' onClick = {closeMobileMenu}>
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className = 'nav-item'>
-                            <Link to ='/sign-up' className = 'nav-links-mobile' onClick = {closeMobileMenu}>
-                                Sign-Up
-                            </Link>
-                        </li>
-                    </ul>
-                    {button && <Button buttonStyle = 'btn--outline'> SIGNUP </Button>}
-                </div>
-
-            </nav>
-        </>
-    );
-}
-
-export default Navbar;
+export default AppNavbar;
