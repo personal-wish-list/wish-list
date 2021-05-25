@@ -31,29 +31,24 @@ function Navbar() {
                 <div className = "navbar-container">
                     <Link to ='/' className = "navbar-logo" onClick = {closeMobileMenu}>
                         Wish-List &nbsp;
-                        <i className="fas fa-gift"/>
+                        <i class="fas fa-gift"/>
                     </Link>
                     <div className = "menu-icon" onClick = {handleClick}>
                         <i className = {click ? 'fas fa-times' : 'fas fa-bars'} />
                     </div>
                     <ul className = {click ? 'nav-menu active' : 'nav-menu'}>
                         <li className = 'nav-item'>
-                            <Link to ='/' className = 'nav-links' onClick = {closeMobileMenu}>
-                                Home
+                            <Link to ='../Login' className = 'nav-links' onClick = {closeMobileMenu}>
+                                Login
                             </Link>
-                        </li>
-                        <li className = 'nav-item'>
-                            <Link to ='/dashboard' className = 'nav-links' onClick = {closeMobileMenu}>
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className = 'nav-item'>
-                            <Link to ='/sign-up' className = 'nav-links-mobile' onClick = {closeMobileMenu}>
-                                Sign-Up
+                            <Link to ='../Signup' className = 'nav-links-mobile' onClick = {closeMobileMenu}>
+                                SignUp
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button id='login' buttonStyle = 'btn--outline'> SIGNUP </Button>}
+                    {button && <Button buttonStyle = 'btn--outline'> SIGNUP </Button>}
+                
+                    
                 </div>
 
             </nav>
