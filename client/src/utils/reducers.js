@@ -1,4 +1,5 @@
 import {
+    ADD_WISHLIST,
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
     SORT_WISHLIST_ALPHABETICALLY,
@@ -19,6 +20,7 @@ import {
 } from './actions';
 
 const initialState = {
+    wishlists: [],
     wishlist: [],
     secretList: [],
     shoppingList: []
@@ -27,6 +29,12 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         // ============ WISHLIST CASES START ===================================================
+        case ADD_WISHLIST:
+            return {
+                ...state,
+                wishlists: [...state.wishlists, action.wishlist]
+            };
+        
         case ADD_TO_WISHLIST:
             return {
                 ...state,

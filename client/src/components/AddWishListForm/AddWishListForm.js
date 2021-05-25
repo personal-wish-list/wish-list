@@ -1,44 +1,45 @@
 import React, { useState } from "react";
-import './css/style.css';
+import './add-wishlist-form.css';
 
 import { useDispatch } from 'react-redux'
-import { idbPromise } from "../../utils/helpers";
-import { ADD_TO_WISHLIST } from "../../utils/actions";
+import { idbPromise } from "../../utils/idb";
+import { ADD_WISHLIST } from "../../utils/actions";
 
-const AddItemForm = () => {
+const AddWishListForm = () => {
     const dispatch = useDispatch();
 
     const [formState, setFormState]
         = useState({
             _id: '',
             name: '',
-            link: '',
-            price: '',
-            specialNote: '',
-            isClaimed: false,
-            isClaimedBy: ''
+            month: '',
+            day: '',
+            year: '',
+            items: []
         });
-    const {
+    let {
         _id,
         name,
-        link,
-        price,
-        specialNote,
-        isClaimed,
-        isClaimedBy
+        month,
+        day,
+        year,
+        items
     } = formState;
+
+    const date = new Date();
+    const thisYear = date.getFullYear();
 
     const handleSubmit = e => {
         e.preventDefault();
         console.log(formState);
 
         dispatch({
-            type: ADD_TO_WISHLIST,
+            type: ADD_WISHLIST,
             item: { ...formState }
         });
-
-        idbPromise('wishlist', 'put', {
-            ...formState
+        idbPromise('wishlists', 'put', {
+            ...formState,
+            items: items
         });
     };
 
@@ -51,9 +52,9 @@ const AddItemForm = () => {
 
     return (
         <section>
-            <h2>Add an Item</h2>
+            <h2>Add a Wishlist</h2>
             <form
-                id='add-item-form'
+                id='add-wishlist-form'
                 onSubmit={handleSubmit}
             >
 
@@ -80,29 +81,34 @@ const AddItemForm = () => {
                     />
                 </div>
                 <div className="form-input">
-                    <label htmlFor="link">Link:</label>
-                    <input
-                        type="text"
-                        name="link"
-                        defaultValue={link}
-                        onBlur={handleChange}
-                    />
-                </div>
-                <div className="form-input">
-                    <label htmlFor="price">Price: $</label>
+                    <label htmlFor="month">Month:</label>
                     <input
                         type="number"
-                        name="price"
-                        defaultValue={`$${price}`}
+                        name="month"
+                        min='1'
+                        max='12'
+                        defaultValue={month}
                         onBlur={handleChange}
                     />
                 </div>
                 <div className="form-input">
-                    <label htmlFor="specialNote">Special Notes:</label>
-                    <textarea
-                        name="specialNote"
-                        rows="5"
-                        defaultValue={specialNote}
+                    <label htmlFor="day">Day:</label>
+                    <input
+                        type="number"
+                        name="day"
+                        min='1'
+                        max='31'
+                        defaultValue={day}
+                        onBlur={handleChange}
+                    />
+                </div>
+                <div className="form-input">
+                    <label htmlFor="year">Year:</label>
+                    <input
+                        type="number"
+                        name="year"
+                        min={thisYear}
+                        defaultValue={year}
                         onBlur={handleChange}
                     />
                 </div>
@@ -115,4 +121,4 @@ const AddItemForm = () => {
     );
 };
 
-export default AddItemForm;
+export default AddWishListForm;
