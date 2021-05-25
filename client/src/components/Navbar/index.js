@@ -31,7 +31,7 @@ function Navbar() {
                 <div className = "navbar-container">
                     <Link to ='/' className = "navbar-logo" onClick = {closeMobileMenu}>
                         Wish-List &nbsp;
-                        <i class="fas fa-gift"/>
+                        <i className="fas fa-gift"/>
                     </Link>
                     <div className = "menu-icon" onClick = {handleClick}>
                         <i className = {click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -53,7 +53,7 @@ function Navbar() {
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle = 'btn--outline'> SIGNUP </Button>}
+                    {button && <Button id='login' buttonStyle = 'btn--outline'> SIGNUP </Button>}
                 </div>
 
             </nav>
