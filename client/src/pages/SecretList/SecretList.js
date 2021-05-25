@@ -62,25 +62,37 @@ const SecretList = () => {
     const stopFiltering = () => {
         setIsFiltering(false);
         setMinPrice(0);
-        setMaxPrice(100);
+        setMaxPrice(500);
         setFilteredList(secretList);
     };
 
-    const chooseRandomGift = async () => {
-        setIsFiltering(true);
+    const chooseRandomGift = () => {
+        setIsFiltering(true)
+            // .then(() => console.log(filteredList))
+            // .then(() => setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice)))
+            // .then(() => console.log(filteredList))
+            // .then(() => {
+            //     const randomGift = filteredList[Math.floor(Math.random() * filteredList.length)];
+            //     setFilteredList([randomGift]);
+            // });
+
+    // ================================================
 
         // console logs before and after the filter function return the same filteredList
-        setFilteredList(secretList);
-        console.log(filteredList);
-        setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice));
-        console.log(filteredList);
+        
+        // setFilteredList(secretList);
+        // console.log(filteredList);
+        // setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice));
+        // console.log(filteredList);
 
         // random function
-        const randomGift = filteredList[Math.floor(Math.random() * filteredList.length)];
-        console.log(randomGift);
+        
+        // const randomGift = filteredList[Math.floor(Math.random() * filteredList.length)];
+        // console.log(randomGift);
 
         // array with only randomGift inside
-        setFilteredList([randomGift]);
+
+        // setFilteredList([randomGift]);
     };
 
     return (
@@ -118,14 +130,7 @@ const SecretList = () => {
                 />
             </div>
             <button onClick={stopFiltering}>Clear Filters</button>
-            <button 
-                onClick={() => {
-                    // this looks crazy because we may need to add another function...
-                    chooseRandomGift();
-                }}
-            >
-                Select Random Gift!
-            </button>
+            {/* <button onClick={chooseRandomGift}>Select Random Gift!</button> */}
 
             {isFiltering ? (
                 // if isFiltering render this

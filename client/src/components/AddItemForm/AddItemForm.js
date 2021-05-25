@@ -52,6 +52,13 @@ const AddItemForm = () => {
             isClaimedBy: isClaimedBy
         });
 
+        // setFormState({
+        //     _id: '',
+        //     name: '',
+        //     link: '',
+        //     price: '',
+        //     specialNote: '',
+        // });
     };
 
     const handleChange = e => {
