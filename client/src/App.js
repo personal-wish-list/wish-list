@@ -14,16 +14,17 @@ import store from './utils/store';
 import Navbar from './components/Navbar';
 
 const client = new ApolloClient({
-  request: (operation) => {
-    const token = localStorage.getItem('id_token')
+  request: operation => {
+    const token = localStorage.getItem('id_token');
+
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : ''
       }
-    })
+    });
   },
-  uri: '/graphql',
-})
+  uri: '/graphql'
+});
 
 function App() {
   return (
