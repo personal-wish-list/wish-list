@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import './css/style.css';
 import { Button } from '../Button';
-
+import Auth from '../../utils/auth';
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -10,6 +10,11 @@ function Navbar() {
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
+
+    const logout = event => {
+        event.preventDefault();
+        Auth.logout();
+      };
 
     const showButton = () => {
         if(window.innerWidth <= 960) {
@@ -36,6 +41,16 @@ function Navbar() {
                     <div className = "menu-icon" onClick = {handleClick}>
                         <i className = {click ? 'fas fa-times' : 'fas fa-bars'} />
                     </div>
+
+                    {Auth.loggedIn() ? (
+                        <>
+                        <Link to="../Home">Me</Link>
+                        <a href="/" onClick={logout}>
+                            Logout
+                        </a>
+                        </>
+                    ) : (
+                        <>
                     <ul className = {click ? 'nav-menu active' : 'nav-menu'}>
                         <li className = 'nav-item'>
                             <Link to ='../Login' className = 'nav-links' onClick = {closeMobileMenu}>
@@ -47,7 +62,8 @@ function Navbar() {
                         </li>
                     </ul>
                     {button && <Button buttonStyle = 'btn--outline'> SIGNUP </Button>}
-                
+                        </>
+                    )}
                     
                 </div>
 
