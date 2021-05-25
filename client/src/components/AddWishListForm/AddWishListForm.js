@@ -3,7 +3,7 @@ import './add-wishlist-form.css';
 
 import { useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/idb";
-// import {  } from "../../utils/actions";
+import { ADD_WISHLIST } from "../../utils/actions";
 
 const AddWishListForm = () => {
     const dispatch = useDispatch();
@@ -33,8 +33,14 @@ const AddWishListForm = () => {
         e.preventDefault();
         console.log(formState);
 
-        // dispatches and idbPromises go here
-
+        dispatch({
+            type: ADD_WISHLIST,
+            item: { ...formState }
+        });
+        idbPromise('wishlists', 'put', {
+            ...formState,
+            items: items
+        });
     };
 
     const handleChange = e => {
