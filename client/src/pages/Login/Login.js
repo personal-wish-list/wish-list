@@ -24,7 +24,11 @@ const Login = props => {
 
     try {
       const { data } = await login({
-        variables: { ...formState }
+        variables: { 
+          ...formState,
+          email: formState.email,
+          password: formState.password
+        }
       });
 
       Auth.login(data.login.token);
