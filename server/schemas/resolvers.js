@@ -34,7 +34,14 @@ const resolvers = {
     wishlists: async (parent, args, context) => {
       const lists = await WishList.find();
       return lists;
-    }
+    },
+    username: async (parent, args, context) => {
+      console.log(args);
+
+      if (context.user) {
+        return await User.findOne(args);
+      }
+    },
 
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
