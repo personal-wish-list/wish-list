@@ -29,10 +29,13 @@ mutation addFriend($friendId: ID!) {
     _id
     firstName
     lastName
+    username
+    email
     friends {
       _id
       firstName
       lastName
+      username
     }
   }
 }`

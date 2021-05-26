@@ -32,8 +32,6 @@ const resolvers = {
     },
 
     username: async (parent, args, context) => {
-      console.log(args);
-
       if (context.user) {
         return await User.findOne(args);
       }
