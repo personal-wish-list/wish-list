@@ -1,4 +1,7 @@
 import {
+    ADD_FRIEND,
+    REMOVE_FRIEND,
+
     ADD_WISHLIST,
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
@@ -23,6 +26,7 @@ import {
 } from './actions';
 
 const initialState = {
+    friends: [],
     wishlists: [],
     wishlist: [],
     secretList: [],
@@ -31,6 +35,24 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        // ================ FRIEND CASES START ==================================================
+        case ADD_FRIEND:
+            return {
+                ...state,
+                friends: [...state.friends, action.friend]
+            };
+
+        case REMOVE_FRIEND:
+            const newFriendsList = state.friends.filter(friend => {
+                return friend._id !== action._id;
+            });
+
+            return {
+                ...state,
+                friends: newFriendsList
+            }
+        // =============== FRIEND CASES END =====================================================
+
         // ============ WISHLIST CASES START ===================================================
         case ADD_WISHLIST:
             return {
