@@ -12,8 +12,15 @@ const FriendsList = () => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
+    let userObj = {
+        username: '',
+        firstName: '',
+        lastName: '',
+        email: ''
+    }
     const [searchedUsername, setSearchedUsername] = useState('')
-    const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]);
+    const [foundUser, setFoundUser] = useState(userObj);
     const { loading, data } = useQuery(QUERY_USERNAME, {
         variables: { username: searchedUsername }
     });
@@ -27,12 +34,14 @@ const FriendsList = () => {
         e.preventDefault();
 
         if (data) {
-            console.log(data);
+            setFoundUser(data.username);
         } else {
             console.log('no data');
         }
-        
+    }
 
+    const addFriend = () => {
+        console.log(foundUser.username);
     }
 
     // if (loading) return <div>loading...</div>;
@@ -55,21 +64,48 @@ const FriendsList = () => {
                 </button>
             </form>
 
-            {state.friends.length ? (
+            {foundUser.username.length ? (
                 <div>
-                    {state.friends.map(friend => {
-                        <button className='' key={friend._id}>
-                            <FriendCard friend={friend} />
-                        </button>
+                    <p>{foundUser.username}</p>
+                    <p>{foundUser.firstName}</p>
+                    <p>{foundUser.lastName}</p>
+                    <p>{foundUser.email}</p>
+                    <button onClick={addFriend} type='button'>Add Friend</button>
+                </div>
+            ) : (
+                <div />
+            )}
+
+{/* {users.length ? (
+                <div>
+                    {users.map(user => {
+                        <div>
+                            {user.username}
+                            {user.firstName}
+                            {user.lastName}
+                            {user.email}
+                        </div>
                     })}
                 </div>
             ) : (
-                <div>
+                <div></div>
+            )} */}
 
-                </div>
-            )}
-
+{
+    state.friends.length ? (
+        <div>
+            {state.friends.map(friend => {
+                <button className='' key={friend._id}>
+                    <FriendCard friend={friend} />
+                </button>
+            })}
         </div>
+    ) : (
+    <div></div>
+)
+}
+
+        </div >
     );
 };
 
