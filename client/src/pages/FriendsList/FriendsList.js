@@ -3,7 +3,7 @@ import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
 
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER } from '../../utils/queries';
+import { QUERY_USERNAME } from '../../utils/queries';
 import { ADD_FRIEND } from '../../utils/mutations';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_USER_AS_FRIEND, REMOVE_USER_AS_FRIEND } from '../../utils/actions';
@@ -14,7 +14,7 @@ const FriendsList = () => {
 
     const [searchedUsername, setSearchedUsername] = useState('')
     const [users, setUsers] = useState([]);
-    const { loading, data } = useQuery(QUERY_USER, {
+    const { loading, data } = useQuery(QUERY_USERNAME, {
         variables: { username: searchedUsername }
     });
 
@@ -34,6 +34,8 @@ const FriendsList = () => {
         
 
     }
+
+    // if (loading) return <div>loading...</div>;
 
     return (
         <div className="container">

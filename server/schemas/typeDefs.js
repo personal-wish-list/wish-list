@@ -14,6 +14,7 @@ const typeDefs = gql`
     _id: ID
     firstName: String
     lastName: String
+    username: String!
     email: String
     friends: [User]
     lists: [WishList]
@@ -48,6 +49,7 @@ const typeDefs = gql`
   type Query {
     user: User
     users: [User]
+    username(username: String!): User
   }
 
   type Mutation {

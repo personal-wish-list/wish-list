@@ -4,6 +4,7 @@ export const QUERY_USER = gql`
 {
     user {
     _id
+    username
     email
     friends{
       _id
@@ -21,3 +22,27 @@ export const QUERY_USER = gql`
   }
 }
 `;
+
+export const QUERY_USERS = gql`
+  {
+    users {
+      _id
+      username
+      firstName
+      lastName
+      email
+    }
+  }
+`;
+
+export const QUERY_USERNAME = gql`
+  query ($username: String!) {
+    username (username: $username) {
+      _id
+      username
+      firstName
+      lastName
+      email
+    }
+  }
+`

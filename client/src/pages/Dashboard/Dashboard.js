@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
+import AddWishListForm from '../../components/AddWishListForm/AddWishListForm';
 import WishList from '../WishList/WishList';
 
 const Dashboard = () => {
