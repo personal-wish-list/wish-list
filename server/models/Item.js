@@ -10,7 +10,6 @@ const itemSchema = new Schema({
     },
     link: {
         type: String,
-        validate: value => validator.isURL(),
         required: true
     },
     specialNote: {

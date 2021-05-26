@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, WishList, Item } = require('../models');
+const { User, WishList } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -30,6 +30,11 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+
+    wishlists: async (parent, args, context) => {
+      const lists = await WishList.find();
+      return lists;
+    }
 
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
@@ -120,52 +125,44 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addWishList: async (parent, { name, month, day, year, items }, context) => {
+    addWishList: async (parent, args, context) => {
+      console.log(context.user);
+      console.log(context.user._id);
       if (context.user) {
-        const list = new WishList({ name, month, day, year, items });
 
-        await User.findByIdAndUpdate(context.user._id, { $push: { lists: list } });
+        const newList = new WishList(args);
+        newList.save(function (err) {
+          if (err) return handleError(err);
+        })
 
-        return list;
+        console.log(newList);
+
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id }, { $addToSet: { lists: newList } },
+          { new: true });
+
+        console.log(updatedUser);
+
+        return newList;
       }
 
       throw new AuthenticationError('Not logged in');
     },
 
     updateWishList: async (parent, args, context) => {
+      console.log(args);
       const itemObj = args.input;
       const wishId = args._id;
 
-      const item = new Item(itemObj);
-
-      const updatedList = await WishList.findOneAndUpdate(
-        { _id: wishId },
+      const updatedList = await WishList.findByIdAndUpdate(
+        wishId,
         {
-          $addToSet: { items: item }
+          $addToSet: { items: itemObj }
         },
         { new: true }
-      );
+      )
 
-      let updatedUser = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        {
-          $pull: {
-            lists: { _id: wishId }
-          }
-        },
-        { new: true });
-
-      updatedUser = await User.findByIdAndUpdate(
-        { _id: context.user._id },
-        {
-          $push: {
-            lists: updatedList
-          }
-        },
-        { new: true }
-      );
-
-      return updatedUser;
+      return updatedList;
 
     },
   }
