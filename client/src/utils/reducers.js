@@ -1,4 +1,7 @@
 import {
+    ADD_USER_AS_FRIEND,
+    REMOVE_USER_AS_FRIEND,
+
     ADD_WISHLIST,
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
@@ -10,6 +13,9 @@ import {
 
     ADD_TO_SECRET_LIST,
     ADD_MULTIPLE_TO_SECRET_LIST,
+    SORT_SECRET_LIST_ALPHABETICALLY,
+    SORT_SECRET_LIST_PRICE_ASC,
+    SORT_SECRET_LIST_PRICE_DESC,
     UPDATE_SECRET_LIST_ITEM,
     REMOVE_FROM_SECRET_LIST,
 
@@ -20,6 +26,7 @@ import {
 } from './actions';
 
 const initialState = {
+    friends: [],
     wishlists: [],
     wishlist: [],
     secretList: [],
@@ -28,6 +35,24 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        // ================ FRIEND CASES START ==================================================
+        case ADD_USER_AS_FRIEND:
+            return {
+                ...state,
+                friends: [...state.friends, action.friend]
+            };
+
+        case REMOVE_USER_AS_FRIEND:
+            const newFriendsList = state.friends.filter(friend => {
+                return friend._id !== action._id;
+            });
+
+            return {
+                ...state,
+                friends: newFriendsList
+            }
+        // =============== FRIEND CASES END =====================================================
+
         // ============ WISHLIST CASES START ===================================================
         case ADD_WISHLIST:
             return {
@@ -107,6 +132,38 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 secretList: [...action.items]
+            };
+
+        case SORT_SECRET_LIST_ALPHABETICALLY:
+            let abcSecretList = state.secretList.sort((a, b) => {
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                return 0;
+            });
+
+            return {
+                ...state,
+                secretList: abcSecretList
+            }
+
+        case SORT_SECRET_LIST_PRICE_ASC:
+            let priceAscSecretList = state.secretList.sort((a, b) => {
+                return parseFloat(a.price) - parseFloat(b.price);
+            });
+
+            return {
+                ...state,
+                secretList: priceAscSecretList
+            };
+
+        case SORT_SECRET_LIST_PRICE_DESC:
+            let priceDescSecretList = state.secretList.sort((a, b) => {
+                return parseFloat(b.price) - parseFloat(a.price);
+            });
+
+            return {
+                ...state,
+                secretList: priceDescSecretList
             };
 
         case UPDATE_SECRET_LIST_ITEM:

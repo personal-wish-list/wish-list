@@ -10,7 +10,11 @@ const itemSchema = new Schema({
     },
     link: {
         type: String,
-        validate: value => validator.isURL(),
+        // validate: value => validator.isURL(),
+        // match: [
+        //     /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/,
+        //     'must be a valid url'
+        // ],
         required: true
     },
     specialNote: {

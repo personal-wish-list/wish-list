@@ -4,19 +4,22 @@ import './secret-list.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
 import {
-    ADD_MULTIPLE_TO_SECRET_LIST
+    ADD_MULTIPLE_TO_SECRET_LIST,
+    SORT_SECRET_LIST_ALPHABETICALLY,
+    SORT_SECRET_LIST_PRICE_ASC,
+    SORT_SECRET_LIST_PRICE_DESC
 } from "../../utils/actions";
 
 import SecretListItem from '../../components/SecretListItem/SecretListItem';
 
 const SecretList = () => {
     // getting the secret list
-    const secretList = useSelector(state => state.secretList);
+    const state = useSelector(state => state);
 
     const dispatch = useDispatch();
 
     // if filtering, we'll render a filtered list
-    const [filteredList, setFilteredList] = useState(secretList);
+    const [filteredList, setFilteredList] = useState(state.secretList);
     const [isFiltering, setIsFiltering] = useState(false);
     // parameters for filtering
     const [minPrice, setMinPrice] = useState(0);
@@ -32,13 +35,13 @@ const SecretList = () => {
             });
         }    
 
-        if (!secretList.length) {
+        if (!state.secretList.length) {
             getSecretList();
         }
-    }, [secretList.length, dispatch]);
+    }, [state.secretList.length, dispatch]);
 
     const handleFilterChange = e => {
-        setFilteredList(secretList);
+        setFilteredList(state.secretList);
         setIsFiltering(true);
 
         let {
@@ -51,7 +54,7 @@ const SecretList = () => {
         if (column === 'minPrice') setMinPrice(parseInt(value));
         if (column === 'maxPrice') setMaxPrice(parseInt(value));
 
-        const priceFilteredList = secretList.filter(item => {
+        const priceFilteredList = state.secretList.filter(item => {
             return item.price >= minPrice && item.price <= maxPrice;
         });
 
@@ -63,37 +66,60 @@ const SecretList = () => {
         setIsFiltering(false);
         setMinPrice(0);
         setMaxPrice(500);
-        setFilteredList(secretList);
+        setFilteredList(state.secretList);
     };
 
-    const chooseRandomGift = () => {
-        setIsFiltering(true)
-            // .then(() => console.log(filteredList))
-            // .then(() => setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice)))
-            // .then(() => console.log(filteredList))
-            // .then(() => {
-            //     const randomGift = filteredList[Math.floor(Math.random() * filteredList.length)];
-            //     setFilteredList([randomGift]);
-            // });
-
-    // ================================================
-
-        // console logs before and after the filter function return the same filteredList
+    const sortAlphabetically = () => {
+        filteredList.sort((a, b) => {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });
         
-        // setFilteredList(secretList);
-        // console.log(filteredList);
-        // setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice));
-        // console.log(filteredList);
-
-        // random function
-        
-        // const randomGift = filteredList[Math.floor(Math.random() * filteredList.length)];
-        // console.log(randomGift);
-
-        // array with only randomGift inside
-
-        // setFilteredList([randomGift]);
+        dispatch({
+            type: SORT_SECRET_LIST_ALPHABETICALLY,
+            wishlist: [filteredList]
+        });    
     };
+
+    const sortPriceAscending = () => {
+        filteredList.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+
+        dispatch({
+            type: SORT_SECRET_LIST_PRICE_ASC,
+            wishlist: [filteredList]
+        });    
+    };
+
+    const sortPriceDescending = () => {
+        filteredList.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+
+        dispatch({
+            type: SORT_SECRET_LIST_PRICE_DESC,
+            wishlist: [filteredList]
+        });    
+    };
+
+
+    // const chooseRandomGift = () => {
+    //     setIsFiltering(true)
+
+    //     console logs before and after the filter function return the same filteredList
+        
+    //     setFilteredList(secretList);
+    //     console.log(filteredList);
+    //     setFilteredList(secretList.filter(item => item.price >= minPrice && item.price <= maxPrice));
+    //     console.log(filteredList);
+
+    //     random function
+        
+    //     const randomGift = filteredList[Math.floor(Math.random() * filteredList.length)];
+    //     console.log(randomGift);
+
+    //     array with only randomGift inside
+
+    //     setFilteredList([randomGift]);
+    // };
 
     return (
         <div className="container">
@@ -132,6 +158,11 @@ const SecretList = () => {
             <button onClick={stopFiltering}>Clear Filters</button>
             {/* <button onClick={chooseRandomGift}>Select Random Gift!</button> */}
 
+            <button onClick={sortAlphabetically}>Sort Alphabetically</button>
+            <button onClick={sortPriceAscending}>Sort Price Asc</button>
+            <button onClick={sortPriceDescending}>Sort Price Desc</button>
+
+
             {isFiltering ? (
                 // if isFiltering render this
                 <div>
@@ -143,9 +174,9 @@ const SecretList = () => {
                 // else render this
                 <div>
                     {
-                        secretList.length ? (
+                        state.secretList.length ? (
                             <div>
-                                {secretList.map(item => (
+                                {state.secretList.map(item => (
                                     <SecretListItem key={item._id} item={item} />
                                 ))}
                             </div>
