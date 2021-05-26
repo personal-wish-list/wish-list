@@ -44,10 +44,22 @@ function Navbar() {
 
                     {Auth.loggedIn() ? (
                         <>
-                        <Link to="../Home">Me</Link>
-                        <a href="/" onClick={logout}>
+                        <ul className = {click ? 'nav-menu active' : 'nav-menu'}>
+                        <Link to="/wishlist" className = 'nav-links' onClick = {closeMobileMenu}> 
+                            DashBoard
+                        </Link>
+                        <Link to="/shoppinglist" className = 'nav-links' onClick = {closeMobileMenu}> 
+                            Shopping
+                        </Link>
+                        <Link to="/friendcard" className = 'nav-links' onClick = {closeMobileMenu}> 
+                            Friends
+                        </Link>
+                        <Link to="/Home" className = 'nav-links' onClick = {closeMobileMenu}> 
+                        <a onClick={logout}>
                             Logout
                         </a>
+                        </Link>
+                        </ul>
                         </>
                     ) : (
                         <>
