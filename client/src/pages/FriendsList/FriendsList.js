@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
 
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_USER } from '../../utils/queries';
+import { ADD_FRIEND } from '../../utils/mutations';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    ADD_FRIEND,
-    REMOVE_FRIEND
-} from '../../utils/actions';
+import { ADD_USER_AS_FRIEND, REMOVE_USER_AS_FRIEND } from '../../utils/actions';
 
 const FriendsList = () => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
-    const handleSearch = () => {
-        console.log('friend search says, "hi!"');
+    const [searchedUsername, setSearchedUsername] = useState('')
+    const [users, setUsers] = useState([]);
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: { username: searchedUsername }
+    });
+
+    const handleChange = e => {
+        console.log(e.target.value);
+        setSearchedUsername(e.target.value)
+    }
+
+    const handleSearch = e => {
+        e.preventDefault();
+
+        if (data) {
+            console.log(data);
+        } else {
+            console.log('no data');
+        }
+        
+
     }
 
     return (
@@ -26,6 +45,8 @@ const FriendsList = () => {
                     type='text'
                     name='username'
                     placeholder='Find friends here...'
+                    value={searchedUsername}
+                    onChange={handleChange}
                 />
                 <button type='submit'>
                     <i class="fas fa-search"></i>

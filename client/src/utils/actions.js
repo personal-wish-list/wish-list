@@ -1,5 +1,5 @@
-export const ADD_FRIEND = 'ADD_FRIEND';
-export const REMOVE_FRIEND = 'REMOVE_FRIEND';
+export const ADD_USER_AS_FRIEND = 'ADD_FRIEND';
+export const REMOVE_USER_AS_FRIEND = 'REMOVE_FRIEND';
 
 export const ADD_WISHLIST = 'ADD_WISHLIST';
 export const ADD_TO_WISHLIST = 'ADD_TO_WISHLIST';
