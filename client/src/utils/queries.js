@@ -9,6 +9,12 @@ export const QUERY_USER = gql`
     friends{
       _id
       firstName
+      lastName
+      username
+      lists {
+        _id
+        name
+      }
     }
     lists{
       _id

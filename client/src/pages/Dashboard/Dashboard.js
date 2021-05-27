@@ -4,10 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 
 import { useQuery } from '@apollo/react-hooks'
 import { QUERY_USER } from '../../utils/queries';
-import { useSelector } from 'react-redux';
 
 import AddWishListForm from '../../components/AddWishListForm/AddWishListForm';
-// import WishList from '../WishList/WishList';
 
 const Dashboard = () => {
     const { loading, data } = useQuery(QUERY_USER);
@@ -19,8 +17,10 @@ const Dashboard = () => {
         if (data) {
             setQueryState(data);
             setWishlists(data.user.lists);
+            
+            console.log(queryState);
         }
-    }, [data, loading]);
+    }, [data, loading, queryState]);
 
     if (loading) return <div>Loading...</div>
 
