@@ -45,8 +45,8 @@ mutation addFriend($friendId: ID!) {
 }`
 
 export const ADD_WISHLIST = gql`
-mutation addWishList($name: String!, $month: Int!, $day: Int!, $year: Int!, $items: [ItemInput]!){
-  addWishList(name: $name, month: $month, day: $day, year: $year, items: $items){
+mutation addWishList($name: String!, $month: Int!, $day: Int!, $year: Int!){
+  addWishList(name: $name, month: $month, day: $day, year: $year){
     _id
     name
     month

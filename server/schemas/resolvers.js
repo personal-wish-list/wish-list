@@ -35,6 +35,13 @@ const resolvers = {
       const lists = await WishList.find();
       return lists;
     },
+
+    wishlist: async (parent, args, context) => {
+      if (context.user) {
+        return await WishList.findOne(args);
+      }
+    },
+
     username: async (parent, args, context) => {
       if (context.user) {
         return await User.findOne(args);

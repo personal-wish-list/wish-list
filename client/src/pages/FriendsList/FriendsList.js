@@ -3,7 +3,11 @@ import { useParams } from 'react-router-dom';
 import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
 
+<<<<<<< HEAD
 import { useQuery, useMutation } from '@apollo/react-hooks';
+=======
+import { useQuery, useMutation } from "@apollo/react-hooks";
+>>>>>>> 6c1eba299fe528d890ef90230ce97b3a76105d77
 import { QUERY_USER, QUERY_USERNAME } from '../../utils/queries';
 import { ADD_FRIEND } from '../../utils/mutations';
 import { useDispatch, useSelector } from 'react-redux';
