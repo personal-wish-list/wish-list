@@ -7,10 +7,8 @@ function FriendCard({friend}) {
 
   return (
     <div className="card">
-      <div className="img-container">
-        {/* <img alt={props.name} src={props.image} /> */}
-      </div>
       <div className="content">
+        I'm a Friend
         <ul>
           <li>
             {/* <strong>Name:</strong> {props.name} */}
