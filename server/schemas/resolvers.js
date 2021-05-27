@@ -42,11 +42,11 @@ const resolvers = {
     //   }
     // },
 
-    // username: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return await User.findOne(args);
-    //   }
-    // },
+    username: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findOne(args);
+      }
+    },
 
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;

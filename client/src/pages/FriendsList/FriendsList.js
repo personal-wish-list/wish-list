@@ -45,6 +45,7 @@ const FriendsList = () => {
         e.preventDefault();
 
         if (usernameSearch.data) {
+            console.log(usernameSearch)
             setFoundUser(usernameSearch.data.username);
         } else {
             console.log('no data');
@@ -65,6 +66,8 @@ const FriendsList = () => {
             type: ADD_USER_AS_FRIEND,
             friend: foundUser
         });
+
+        // window.location.reload();
     };
 
     return (
