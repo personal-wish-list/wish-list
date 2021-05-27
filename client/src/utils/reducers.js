@@ -2,7 +2,7 @@ import {
     ADD_USER_AS_FRIEND,
     REMOVE_USER_AS_FRIEND,
 
-    ADD_WISHLIST,
+    ADD_A_WISHLIST,
     ADD_TO_WISHLIST,
     ADD_MULTIPLE_TO_WISHLIST,
     SORT_WISHLIST_ALPHABETICALLY,
@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
         // =============== FRIEND CASES END =====================================================
 
         // ============ WISHLIST CASES START ===================================================
-        case ADD_WISHLIST:
+        case ADD_A_WISHLIST:
             return {
                 ...state,
                 wishlists: [...state.wishlists, action.wishlist]
