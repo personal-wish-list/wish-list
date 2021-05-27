@@ -40,6 +40,8 @@ const Dashboard = () => {
                 ))
             }
 
+            <AddWishListForm />
+
         </div>
     );
 };

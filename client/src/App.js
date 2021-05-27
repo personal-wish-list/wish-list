@@ -44,7 +44,7 @@ function App() {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/wishlist" component={WishList} /> 
+                <Route exact path="/wishlist/:id" component={WishList} /> 
                 <Route exact path="/shoppinglist" component={ShoppingList} />
                 <Route exact path="/friendslist" component={FriendsList} />
                 <Route component={NoMatch} />

@@ -3,10 +3,13 @@ import './add-wishlist-form.css';
 
 import { useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/idb";
-import { ADD_WISHLIST } from "../../utils/actions";
+import { ADD_A_WISHLIST } from "../../utils/actions";
+import { ADD_WISHLIST } from '../../utils/mutations';
+import { useMutation } from "@apollo/react-hooks";
 
 const AddWishListForm = () => {
     const dispatch = useDispatch();
+    const [addWishlist, { error }] = useMutation(ADD_WISHLIST);
 
     const [formState, setFormState]
         = useState({
@@ -29,12 +32,25 @@ const AddWishListForm = () => {
     const date = new Date();
     const thisYear = date.getFullYear();
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formState);
 
+        try {
+            await addWishlist({
+                variables: { 
+                    name: formState.name,
+                    month: formState.month,
+                    day: formState.day,
+                    year: formState.year
+                }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+
         dispatch({
-            type: ADD_WISHLIST,
+            type: ADD_A_WISHLIST,
             item: { ...formState }
         });
         idbPromise('wishlists', 'put', {
