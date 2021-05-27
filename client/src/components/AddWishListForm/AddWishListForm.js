@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './add-wishlist-form.css';
+import { useParams } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/idb";
@@ -10,10 +11,10 @@ import { useMutation } from "@apollo/react-hooks";
 const AddWishListForm = () => {
     const dispatch = useDispatch();
     const [addWishlist, { error }] = useMutation(ADD_WISHLIST);
+    const { id } = useParams();
 
     const [formState, setFormState]
         = useState({
-            _id: '',
             name: '',
             month: '',
             day: '',
@@ -21,7 +22,6 @@ const AddWishListForm = () => {
             items: []
         });
     let {
-        _id,
         name,
         month,
         day,
@@ -41,7 +41,7 @@ const AddWishListForm = () => {
         // ===================================
         try {
             await addWishlist({
-                variables: { 
+                variables: {
                     name: formState.name,
                     month: formState.month,
                     day: formState.day,
@@ -49,7 +49,7 @@ const AddWishListForm = () => {
                 }
             });
         } catch (err) {
-            console.error(err);
+            console.log(err);
         }
         // ===================================
 
@@ -77,19 +77,6 @@ const AddWishListForm = () => {
                 id='add-wishlist-form'
                 onSubmit={handleSubmit}
             >
-
-
-                {/* ================= FOR TESTING ONLY ================ */}
-                <div className="form-input">
-                    <label htmlFor="_id">ID:</label>
-                    <input
-                        type="text"
-                        name="_id"
-                        defaultValue={_id}
-                        onBlur={handleChange}
-                    />
-                </div>
-                {/* =================================================== */}
 
                 <div className="form-input">
                     <label htmlFor="name">Name:</label>

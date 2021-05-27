@@ -13,7 +13,7 @@ export function idbPromise(storeName, method, object) {
             // create object store for each type of data and set "primary" key index to be the `_id` of the data
 
             // example:
-            db.createObjectStore('wishlists', { keyPath: '_id'});
+            db.createObjectStore('wishlists', { keyPath: '_id' });
             db.createObjectStore('wishlist', { keyPath: '_id' });
             db.createObjectStore('secret list', { keyPath: '_id' });
             db.createObjectStore('shopping list', { keyPath: '_id' });

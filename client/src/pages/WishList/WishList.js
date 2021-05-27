@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import './wishlist.css';
 
-import { useMutation } from '@apollo/react-hooks';
-import { ADD_NEW_WISHLIST, UPDATE_WISHLIST } from '../../utils/mutations';
-
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import WishListItem from '../../components/WishListItem/WishListItem';
 
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
 import {
@@ -18,8 +16,7 @@ import {
 
 
 const WishList = () => {
-    const [addWishy] = useMutation(ADD_NEW_WISHLIST);
-    const [updateWishy] = useMutation(UPDATE_WISHLIST);
+    const { _id } = useParams();
     // ================================================================
     // useParams WOULD GO HERE ALONG WITH wishlist query TO FIND BY _id
     // ================================================================
@@ -40,7 +37,7 @@ const WishList = () => {
         if (!state.wishlist.length) {
             getWishlist();
         }
-    }, [addWishy, state.wishlist.length, dispatch]);
+    }, [state.wishlist.length, dispatch]);
 
     const sortAlphabetically = () => {
         state.wishlist.sort((a, b) => {
