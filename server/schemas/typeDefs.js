@@ -11,19 +11,11 @@ const typeDefs = gql`
   }
 
   type User {
-<<<<<<< HEAD
-    _id: ID!
-    firstName: String!
-    lastName: String!
-    username: String
-    email: String!
-=======
     _id: ID
     firstName: String
     lastName: String
     username: String!
     email: String
->>>>>>> 08026780fa13d21ac81f5a874b1f67309f0d0c8c
     friends: [User]
     lists: [WishList]
   }

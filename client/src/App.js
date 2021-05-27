@@ -6,12 +6,16 @@ import ApolloClient from 'apollo-boost';
 
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
-import NoMatch from './pages/NoMatch/NoMatch'
+import NoMatch from './pages/NoMatch/NoMatch';
+import WishList from './pages/WishList/WishList';
+import ShoppingList from './pages/ShoppingList/ShoppingList';
+import FriendCard from './components/FriendCard/index';
 
 import Home from "./pages/Home/Home";
 import { Provider } from 'react-redux';
 import store from './utils/store';
 import Navbar from './components/Navbar';
+
 
 const client = new ApolloClient({
   request: operation => {
@@ -38,8 +42,9 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
-                {/* <Route exact path="/profile" component={Profile} /> */}
-                {/* <Route exact path="/thought" component={SingleThought} /> */}
+                <Route exact path="/wishlist" component={WishList} /> 
+                <Route exact path="/shoppinglist" component={ShoppingList} />
+                <Route exact path="/friendcard" component={FriendCard} />
                 <Route component={NoMatch} />
               </Switch>
           </div>
