@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import './wishlist.css';
 
-import { useMutation } from '@apollo/react-hooks';
-import { ADD_WISHLIST } from '../../utils/mutations';
-
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import WishListItem from '../../components/WishListItem/WishListItem';
-
 
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
@@ -19,7 +15,6 @@ import {
 
 
 const WishList = () => {
-    const [addWishList] = useMutation(ADD_WISHLIST);
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -35,7 +30,7 @@ const WishList = () => {
         if (!state.wishlist.length) {
             getWishlist();
         }
-    }, [addWishList, state.wishlist.length, dispatch]);
+    }, [state.wishlist.length, dispatch]);
 
     const sortAlphabetically = () => {
         state.wishlist.sort((a, b) => {
@@ -43,7 +38,7 @@ const WishList = () => {
             if (a.name > b.name) return 1;
             return 0;
         });
-
+        
         dispatch({
             type: SORT_WISHLIST_ALPHABETICALLY,
             wishlist: [state.wishlist]
