@@ -47,7 +47,7 @@ We created an application that would take the burden of buying a gift for your f
 ## **Contact**
 Feel free to contact us with any questions or comments!
 * Github: 
-[albenchris](https://github.com/albenchris)
-[agustinxmtz](https://github.com/agustinxmtz)
-[IsiBee](https://github.com/IsiBee)
-[sophiamazurek](https://github.com/sophiamazurek)
+* [albenchris](https://github.com/albenchris)
+* [agustinxmtz](https://github.com/agustinxmtz)
+* [IsiBee](https://github.com/IsiBee)
+* [sophiamazurek](https://github.com/sophiamazurek)
