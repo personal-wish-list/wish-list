@@ -2,7 +2,7 @@
 
 
 ## **Description**
-We created an application that would take the burden of buying a gift for your family and friends. How awesome would it be if people could buy you items from all around the world.  In this application users are able to create custom Wish Lists where they will be able to display gifts they want.
+We created an application that would take the burden of buying a gift for your family and friends. How awesome would it be if people could buy you items from all around the world. In this application users are able to create custom Wish Lists where they will be able to display gifts they want.
 
 
 ## **Table of Contents**
@@ -17,7 +17,7 @@ We created an application that would take the burden of buying a gift for your f
 
 ## **Application**
 ### Home Page
-![Home Page](./public/images/Screen.png)
+![Home Page](./client/public/images/Screen.png)
 
 ## **Deployed:**
 [Wish List](https://wish-list-albenchris.herokuapp.com/)
