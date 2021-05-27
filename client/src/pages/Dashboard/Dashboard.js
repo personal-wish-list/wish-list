@@ -32,7 +32,11 @@ const Dashboard = () => {
                 wishlists.map(wishlist => (
                     <div>
                         <Link
+                        // =================================================
+                        // TRYING TO USE PARAMS TO NAVIGATE TO WISHLIST PAGE
+                        // =================================================
                             to={`/wishlist/${wishlist._id}`}
+                        // =================================================
                         >
                             {wishlist.name}
                         </Link>

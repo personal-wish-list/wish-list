@@ -15,6 +15,10 @@ import {
 
 
 const WishList = () => {
+    // ================================================================
+    // useParams WOULD GO HERE ALONG WITH wishlist query TO FIND BY _id
+    // ================================================================
+
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 

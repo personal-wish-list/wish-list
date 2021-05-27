@@ -36,6 +36,9 @@ const AddWishListForm = () => {
         e.preventDefault();
         console.log(formState);
 
+        // ===================================
+        // ATTEMPT TO ADD WISHLIST TO DATABASE
+        // ===================================
         try {
             await addWishlist({
                 variables: { 
@@ -48,6 +51,7 @@ const AddWishListForm = () => {
         } catch (err) {
             console.error(err);
         }
+        // ===================================
 
         dispatch({
             type: ADD_A_WISHLIST,
