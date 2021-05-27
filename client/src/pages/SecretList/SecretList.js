@@ -124,10 +124,6 @@ const SecretList = () => {
     return (
         <div className="container">
 
-            {/* ======= FOR TESTING ONLY ========================== */}
-            <h2 className='text-green'>Secret List</h2>
-            {/* ==================================================== */}
-
             <div>
                 <label htmlFor='minPrice'>Min Price: $</label>
                 <input

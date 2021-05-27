@@ -29,11 +29,6 @@ const ShoppingList = () => {
 
     return (
         <div className="container">
-
-    {/* ======= FOR TESTING ONLY ========================== */}
-                <h2 className='text-green'>Shopping List</h2>
-    {/* ==================================================== */}
-
                         
             {state.shoppingList.length ? (
                 <div>
