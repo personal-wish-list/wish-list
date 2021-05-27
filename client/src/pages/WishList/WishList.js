@@ -4,6 +4,7 @@ import './wishlist.css';
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import WishListItem from '../../components/WishListItem/WishListItem';
 
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { idbPromise } from '../../utils/idb';
 import {
@@ -15,6 +16,7 @@ import {
 
 
 const WishList = () => {
+    const { _id } = useParams();
     // ================================================================
     // useParams WOULD GO HERE ALONG WITH wishlist query TO FIND BY _id
     // ================================================================
@@ -23,6 +25,7 @@ const WishList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+
         const getWishlist = async () => {
             const wishlist = await idbPromise('wishlist', 'get');
             dispatch({
@@ -42,7 +45,7 @@ const WishList = () => {
             if (a.name > b.name) return 1;
             return 0;
         });
-        
+
         dispatch({
             type: SORT_WISHLIST_ALPHABETICALLY,
             wishlist: [state.wishlist]
@@ -70,18 +73,18 @@ const WishList = () => {
     return (
         
         <div className = 'body'>
+            <h1> Wish List </h1>
             <div className = 'wrapper'>
-
                 <AddItemForm />
             </div>
-            
+
 
 
             {state.wishlist.length ? (
                 <div className = 'main'>
-                    <button onClick={sortAlphabetically}>Sort Alphabetically</button>
-                    <button onClick={sortPriceAscending}>Sort Price Asc</button>
-                    <button onClick={sortPriceDescending}>Sort Price Desc</button>
+                    <button className = 'btn card_btn' onClick={sortAlphabetically}>Sort Alphabetically</button>
+                    <button className = 'btn card_btn' onClick={sortPriceAscending}>Sort Price Asc</button>
+                    <button className = 'btn card_btn' onClick={sortPriceDescending}>Sort Price Desc</button>
                 <ul className = 'cards'>
                     {state.wishlist.map(item => (
                         <WishListItem key={item._id} item={item} />

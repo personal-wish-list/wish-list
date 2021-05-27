@@ -4,13 +4,19 @@ import SecretList from '../SecretList/SecretList';
 import ShoppingList from "../ShoppingList/ShoppingList";
 import AddWishListForm from "../../components/AddWishListForm/AddWishListForm";
 import FriendsList from "../FriendsList/FriendsList";
-import Dashboard from "../Dashboard/Dashboard";
+// import Dashboard from "../Dashboard/Dashboard";
 import WishList from "../WishList/WishList";
+import './Home.css';
 
 const Home = () => {
     return (
-        <div className="container">
 
+        <div>
+            <div className ="video">
+                <video className = "video-container" controls muted autoPlay loop>
+                    <source src="../images/Gift.mp4" type="video/mp4"/>
+                </video>
+            </div>
 
             {/* =============== FOR TESTING PURPOSES ================= */}
             <h2>Wishlist</h2>

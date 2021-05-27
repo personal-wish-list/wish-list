@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './add-wishlist-form.css';
+import { useParams } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux'
 import { idbPromise } from "../../utils/idb";
@@ -8,20 +9,23 @@ import { ADD_WISHLIST } from '../../utils/mutations';
 import { useMutation } from "@apollo/react-hooks";
 
 const AddWishListForm = () => {
+    const date = new Date();
+    const thisYear = date.getFullYear();
+
     const dispatch = useDispatch();
     const [addWishlist, { error }] = useMutation(ADD_WISHLIST);
+    const { _id } = useParams();
 
     const [formState, setFormState]
         = useState({
             _id: '',
             name: '',
-            month: '',
-            day: '',
-            year: '',
+            month: 1,
+            day: 1,
+            year: thisYear,
             items: []
         });
     let {
-        _id,
         name,
         month,
         day,
@@ -29,8 +33,6 @@ const AddWishListForm = () => {
         items
     } = formState;
 
-    const date = new Date();
-    const thisYear = date.getFullYear();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,11 +43,12 @@ const AddWishListForm = () => {
         // ===================================
         try {
             await addWishlist({
-                variables: { 
+                variables: {
                     name: formState.name,
-                    month: formState.month,
-                    day: formState.day,
-                    year: formState.year
+                    month: parseInt(formState.month),
+                    day: parseInt(formState.day),
+                    year: parseInt(formState.year),
+                    items: formState.items
                 }
             });
         } catch (err) {
@@ -57,10 +60,10 @@ const AddWishListForm = () => {
             type: ADD_A_WISHLIST,
             item: { ...formState }
         });
-        idbPromise('wishlists', 'put', {
-            ...formState,
-            items: items
-        });
+        // idbPromise('wishlists', 'put', {
+        //     ...formState,
+        //     items: items
+        // });
     };
 
     const handleChange = e => {
@@ -78,19 +81,6 @@ const AddWishListForm = () => {
                 onSubmit={handleSubmit}
             >
 
-
-                {/* ================= FOR TESTING ONLY ================ */}
-                <div className="form-input">
-                    <label htmlFor="_id">ID:</label>
-                    <input
-                        type="text"
-                        name="_id"
-                        defaultValue={_id}
-                        onBlur={handleChange}
-                    />
-                </div>
-                {/* =================================================== */}
-
                 <div className="form-input">
                     <label htmlFor="name">Name:</label>
                     <input
@@ -103,10 +93,8 @@ const AddWishListForm = () => {
                 <div className="form-input">
                     <label htmlFor="month">Month:</label>
                     <input
-                        type="number"
+                        type="Number"
                         name="month"
-                        min='1'
-                        max='12'
                         defaultValue={month}
                         onBlur={handleChange}
                     />
@@ -116,8 +104,6 @@ const AddWishListForm = () => {
                     <input
                         type="number"
                         name="day"
-                        min='1'
-                        max='31'
                         defaultValue={day}
                         onBlur={handleChange}
                     />

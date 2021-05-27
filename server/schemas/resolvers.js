@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, WishList } = require('../models');
+const { User, WishList, Item } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -36,17 +36,17 @@ const resolvers = {
       return lists;
     },
 
-    wishlist: async (parent, args, context) => {
-      if (context.user) {
-        return await WishList.findOne(args);
-      }
-    },
+    // wishlist: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return await WishList.findOne(args);
+    //   }
+    // },
 
-    username: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findOne(args);
-      }
-    },
+    // username: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return await User.findOne(args);
+    //   }
+    // },
 
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;
@@ -174,9 +174,28 @@ const resolvers = {
         { new: true }
       )
 
+      let updatedUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        {
+          $set: {
+            lists: updatedList
+          }
+        },
+        { new: true });
+
+      console.log(updatedUser);
+
       return updatedList;
 
     },
+
+    claimItem: async (parent, { wishListId, itemId }, context) => {
+      const claimed = await WishList.findByIdAndUpdate(wishListId,
+        { items: { _id: itemId, isClaimed: true } },
+        { new: true });
+
+      return claimed;
+    }
   }
 };
 
