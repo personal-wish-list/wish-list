@@ -11,7 +11,6 @@ import { ADD_USER_AS_FRIEND, REMOVE_USER_AS_FRIEND } from '../../utils/actions';
 import Auth from '../../utils/auth';
 
 const FriendsList = () => {
-    const [addFriend] = useMutation(ADD_FRIEND);
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -94,22 +93,14 @@ const FriendsList = () => {
                     <p>{foundUser.firstName}</p>
                     <p>{foundUser.lastName}</p>
                     <p>{foundUser.email}</p>
-<<<<<<< HEAD
-    <button onClick={handleClick} type='button'>Add Friend</button>
-=======
                     <button onClick={addFriendHandler} type='button'>Add Friend</button>
->>>>>>> 006abce5fb3606a99b39fc2c731d0bf9bd7af2d0
                 </div >
             ) : (
-    <div></div>
-)}
+                <div></div>
+            )}
 
-<<<<<<< HEAD
-{/* {users.length ? (
-=======
 
             {/* {myFriends.length ? (
->>>>>>> 006abce5fb3606a99b39fc2c731d0bf9bd7af2d0
                 <div>
                     {myFriends.map(friend => {
                         <FriendCard key={friend._id} friend={friend} />
@@ -119,23 +110,6 @@ const FriendsList = () => {
                 <div></div>
             )} */}
 
-<<<<<<< HEAD
-{
-    state.friends.length ? (
-        <div>
-            {state.friends.map(friend => {
-                <button className='' key={friend._id}>
-                    <FriendCard friend={friend} />
-                </button>
-            })}
-        </div>
-    ) : (
-        <div></div>
-    )
-}
-
-=======
->>>>>>> 006abce5fb3606a99b39fc2c731d0bf9bd7af2d0
         </div >
     );
 };
