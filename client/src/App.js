@@ -15,6 +15,7 @@ import Home from "./pages/Home/Home";
 import { Provider } from 'react-redux';
 import store from './utils/store';
 import Navbar from './components/Navbar';
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 
 const client = new ApolloClient({
@@ -42,6 +43,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
+                <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/wishlist" component={WishList} /> 
                 <Route exact path="/shoppinglist" component={ShoppingList} />
                 <Route exact path="/friendslist" component={FriendsList} />
