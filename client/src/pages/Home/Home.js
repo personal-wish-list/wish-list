@@ -4,7 +4,7 @@ import SecretList from '../SecretList/SecretList';
 import ShoppingList from "../ShoppingList/ShoppingList";
 import AddWishListForm from "../../components/AddWishListForm/AddWishListForm";
 import FriendsList from "../FriendsList/FriendsList";
-import Dashboard from "../Dashboard/Dashboard";
+// import Dashboard from "../Dashboard/Dashboard";
 import WishList from "../WishList/WishList";
 
 const Home = () => {

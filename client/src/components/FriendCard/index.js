@@ -2,8 +2,8 @@ import React from 'react';
 import './style.css';
 
 // Props are passed through our functional component.
-function FriendCard({friend}) {
-  console.log(friend);
+function FriendCard() {
+  // console.log(friend);
 
   return (
     <div className="card">

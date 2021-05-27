@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
@@ -11,20 +11,22 @@ import { ADD_USER_AS_FRIEND, REMOVE_USER_AS_FRIEND } from '../../utils/actions';
 import Auth from '../../utils/auth';
 
 const FriendsList = () => {
-    const state = useSelector(state => state);
     const dispatch = useDispatch();
 
-    // const { id: userParam } = useParams();
-    // console.log(userParam);
-    const me = useQuery(QUERY_USER);
-        // {
-        //     variables: { _id: userParam }
-        // });
-    console.log(me.data);
-    // console.log(me.data.user.friends);
-    // const myFriends = me.data.user.friends;
+    const { loading, data } = useQuery(QUERY_USER);
+    const [myFriends, setMyFriends] = useState([]);
+    useEffect(() => {
+        if (data) {
+            console.log(data.user.friends);
+            setMyFriends(data.user.friends);
+            console.log(myFriends[0].firstName);
+        }
+    }, [loading, data]);
 
-    let userObj = {
+
+
+
+    let searchedUserObj = {
         _id: '',
         username: '',
         firstName: '',
@@ -32,8 +34,8 @@ const FriendsList = () => {
         email: ''
     };
     const [searchedUsername, setSearchedUsername] = useState('');
-    const [foundUser, setFoundUser] = useState(userObj);
-    const { data } = useQuery(QUERY_USERNAME, {
+    const [foundUser, setFoundUser] = useState(searchedUserObj);
+    const usernameSearch = useQuery(QUERY_USERNAME, {
         variables: { username: searchedUsername }
     });
     const [addFriend] = useMutation(ADD_FRIEND);
@@ -46,8 +48,8 @@ const FriendsList = () => {
     const handleSearch = e => {
         e.preventDefault();
 
-        if (data) {
-            setFoundUser(data.username);
+        if (usernameSearch.data) {
+            setFoundUser(usernameSearch.data.username);
         } else {
             console.log('no data');
         }
@@ -100,15 +102,18 @@ const FriendsList = () => {
             )}
 
 
-            {/* {myFriends.length ? (
+            {myFriends.length ? (
                 <div>
                     {myFriends.map(friend => {
-                        <FriendCard key={friend._id} friend={friend} />
+                        <div>
+                            <h2>{friend.firstName}</h2>
+                            {/* <FriendCard key={friend._id} friend={friend} /> */}
+                        </div>
                     })}
                 </div>
             ) : (
                 <div></div>
-            )} */}
+            )}
 
         </div >
     );
