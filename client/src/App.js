@@ -9,7 +9,7 @@ import Signup from './pages/Signup/Signup';
 import NoMatch from './pages/NoMatch/NoMatch';
 import WishList from './pages/WishList/WishList';
 import ShoppingList from './pages/ShoppingList/ShoppingList';
-import FriendCard from './components/FriendCard/index';
+import FriendsList from './pages/FriendsList/FriendsList';
 
 import Home from "./pages/Home/Home";
 import { Provider } from 'react-redux';
@@ -44,7 +44,7 @@ function App() {
                 <Route exact path="/signup" component={Signup} />
                 <Route exact path="/wishlist" component={WishList} /> 
                 <Route exact path="/shoppinglist" component={ShoppingList} />
-                <Route exact path="/friendcard" component={FriendCard} />
+                <Route exact path="/friendslist" component={FriendsList} />
                 <Route component={NoMatch} />
               </Switch>
           </div>

@@ -1,34 +1,47 @@
 import React, { useState } from "react";
+import { useParams } from 'react-router-dom';
 import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
 
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USERNAME } from '../../utils/queries';
+import { QUERY_USER, QUERY_USERNAME } from '../../utils/queries';
 import { ADD_FRIEND } from '../../utils/mutations';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_USER_AS_FRIEND, REMOVE_USER_AS_FRIEND } from '../../utils/actions';
+import Auth from '../../utils/auth';
 
 const FriendsList = () => {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
+    // const { id: userParam } = useParams();
+    // console.log(userParam);
+    const me = useQuery(QUERY_USER);
+        // {
+        //     variables: { _id: userParam }
+        // });
+    console.log(me.data);
+    // console.log(me.data.user.friends);
+    // const myFriends = me.data.user.friends;
+
     let userObj = {
+        _id: '',
         username: '',
         firstName: '',
         lastName: '',
         email: ''
-    }
-    const [searchedUsername, setSearchedUsername] = useState('')
-    // const [users, setUsers] = useState([]);
+    };
+    const [searchedUsername, setSearchedUsername] = useState('');
     const [foundUser, setFoundUser] = useState(userObj);
-    const { loading, data } = useQuery(QUERY_USERNAME, {
+    const { data } = useQuery(QUERY_USERNAME, {
         variables: { username: searchedUsername }
     });
+    const [addFriend] = useMutation(ADD_FRIEND);
 
     const handleChange = e => {
         console.log(e.target.value);
         setSearchedUsername(e.target.value)
-    }
+    };
 
     const handleSearch = e => {
         e.preventDefault();
@@ -38,13 +51,23 @@ const FriendsList = () => {
         } else {
             console.log('no data');
         }
-    }
+    };
 
-    const addFriend = () => {
+    const addFriendHandler = async () => {
         console.log(foundUser.username);
-    }
+        try {
+            await addFriend({
+                variables: { friendId: foundUser._id }
+            });
+        } catch (err) {
+            console.error(err);
+        }
 
-    // if (loading) return <div>loading...</div>;
+        dispatch({
+            type: ADD_USER_AS_FRIEND,
+            friend: foundUser
+        });
+    };
 
     return (
         <div className="container">
@@ -70,40 +93,22 @@ const FriendsList = () => {
                     <p>{foundUser.firstName}</p>
                     <p>{foundUser.lastName}</p>
                     <p>{foundUser.email}</p>
-                    <button onClick={addFriend} type='button'>Add Friend</button>
+                    <button onClick={addFriendHandler} type='button'>Add Friend</button>
                 </div>
             ) : (
-                <div />
+                <div></div>
             )}
 
-{/* {users.length ? (
+
+            {/* {myFriends.length ? (
                 <div>
-                    {users.map(user => {
-                        <div>
-                            {user.username}
-                            {user.firstName}
-                            {user.lastName}
-                            {user.email}
-                        </div>
+                    {myFriends.map(friend => {
+                        <FriendCard key={friend._id} friend={friend} />
                     })}
                 </div>
             ) : (
                 <div></div>
             )} */}
-
-{
-    state.friends.length ? (
-        <div>
-            {state.friends.map(friend => {
-                <button className='' key={friend._id}>
-                    <FriendCard friend={friend} />
-                </button>
-            })}
-        </div>
-    ) : (
-    <div></div>
-)
-}
 
         </div >
     );
