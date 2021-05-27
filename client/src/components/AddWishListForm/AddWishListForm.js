@@ -11,10 +11,11 @@ import { useMutation } from "@apollo/react-hooks";
 const AddWishListForm = () => {
     const dispatch = useDispatch();
     const [addWishlist, { error }] = useMutation(ADD_WISHLIST);
-    const { id } = useParams();
+    const { _id } = useParams();
 
     const [formState, setFormState]
         = useState({
+            _id: '',
             name: '',
             month: '',
             day: '',

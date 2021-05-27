@@ -50,7 +50,6 @@ const typeDefs = gql`
     user: User
     users: [User]
     wishlists: [WishList]
-    wishlist(_id: ID!): WishList
     username(username: String!): User
   }
 
@@ -59,7 +58,7 @@ const typeDefs = gql`
     updateUser(firstName: String, lastName: String, username: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
     addFriend(friendId: ID!): User
-    addWishList(name: String!, month: Int!, day: Int!, year: Int!): WishList
+    addWishList(name: String!, month: Int!, day: Int!, year: Int!, items: [ItemInput]!): WishList
     updateWishList(_id: ID!, input: ItemInput!): WishList
     claimItem(wishListId: ID!, itemId: ID!): WishList
   }
