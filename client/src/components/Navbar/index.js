@@ -51,7 +51,7 @@ function Navbar() {
                         <Link to="/shoppinglist" className = 'nav-links' onClick = {closeMobileMenu}> 
                             Shopping
                         </Link>
-                        <Link to="/friendcard" className = 'nav-links' onClick = {closeMobileMenu}> 
+                        <Link to="/friendslist" className = 'nav-links' onClick = {closeMobileMenu}> 
                             Friends
                         </Link>
                         <Link to="/Home" className = 'nav-links' onClick = {closeMobileMenu}> 
