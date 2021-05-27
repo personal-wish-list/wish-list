@@ -35,7 +35,7 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
+    <main className="flex-row justify-center mb-4 container-3">
       <div className="col-12 col-md-6">
         <div className="card-2">
           <h4 className="card-header">Sign Up</h4>
