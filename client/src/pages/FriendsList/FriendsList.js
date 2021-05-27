@@ -17,9 +17,9 @@ const FriendsList = () => {
     // const { id: userParam } = useParams();
     // console.log(userParam);
     const me = useQuery(QUERY_USER);
-        // {
-        //     variables: { _id: userParam }
-        // });
+    // {
+    //     variables: { _id: userParam }
+    // });
     console.log(me.data);
     // console.log(me.data.user.friends);
     // const myFriends = me.data.user.friends;
@@ -94,7 +94,7 @@ const FriendsList = () => {
                     <p>{foundUser.lastName}</p>
                     <p>{foundUser.email}</p>
                     <button onClick={addFriendHandler} type='button'>Add Friend</button>
-                </div>
+                </div >
             ) : (
                 <div></div>
             )}
