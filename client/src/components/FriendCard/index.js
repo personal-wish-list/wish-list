@@ -1,27 +1,39 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 // Props are passed through our functional component.
-function FriendCard({friend}) {
+function FriendCard({ friend }) {
   console.log(friend);
+  const {
+    _id,
+    firstName,
+    lastName,
+    username,
+    lists
+  } = friend;
 
   return (
     <div className="card">
       <div className="content">
-        I'm a Friend
         <ul>
           <li>
-            {/* <strong>Name:</strong> {props.name} */}
+            <Link to={`/dashboard/${_id}`}>{username}</Link>
           </li>
           <li>
-            {/* <strong>Username:</strong> {props.username} */}
+            {firstName} {' '} {lastName}
           </li>
         </ul>
       </div>
-      {/* The onClick method will invoke the removeFriends function passing through the value of props.id  */}
-      {/* <span onClick={() => props.removeFriend(props.id)} className="remove">
-        𝘅
-      </span> */}
+      <div>
+        {lists &&
+          lists.map(wishlist => (
+            <div key={wishlist._id}>
+              <Link to={`/wishlist/${wishlist._id}`}>{wishlist.name}</Link>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 }
