@@ -74,14 +74,14 @@ const AddWishListForm = () => {
     }
 
     return (
-        <section>
+        <section className = 'wrapper'>
             <h2>Add a Wishlist</h2>
             <form
                 id='add-wishlist-form'
                 onSubmit={handleSubmit}
             >
-
-                <div className="form-input">
+            <div className = 'contact-form'>
+            <div className="input-fields">
                     <label htmlFor="name">Name:</label>
                     <input
                         type="text"
@@ -89,27 +89,30 @@ const AddWishListForm = () => {
                         defaultValue={name}
                         onBlur={handleChange}
                         placeholder='Birthday, wedding, etc...'
+                        className = 'input'
                     />
                 </div>
-                <div className="form-input">
+                <div className="input-fields">
                     <label htmlFor="month">Month:</label>
                     <input
                         type="Number"
                         name="month"
                         defaultValue={month}
                         onBlur={handleChange}
+                        className = 'input'
                     />
                 </div>
-                <div className="form-input">
+                <div className="input-fields">
                     <label htmlFor="day">Day:</label>
                     <input
                         type="number"
                         name="day"
                         defaultValue={day}
                         onBlur={handleChange}
+                        className = 'input'
                     />
                 </div>
-                <div className="form-input">
+                <div className="input-fields">
                     <label htmlFor="year">Year:</label>
                     <input
                         type="number"
@@ -117,12 +120,15 @@ const AddWishListForm = () => {
                         min={thisYear}
                         defaultValue={year}
                         onBlur={handleChange}
+                        className = 'input'
                     />
                 </div>
 
-                <button type="submit" data-testid="submit">
+                <button className = 'btn' type="submit" data-testid="submit">
                     Submit
                 </button>
+            </div>
+                
             </form>
         </section>
     );
