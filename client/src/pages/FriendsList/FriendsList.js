@@ -45,6 +45,7 @@ const FriendsList = () => {
         e.preventDefault();
 
         if (usernameSearch.data) {
+            console.log(usernameSearch)
             setFoundUser(usernameSearch.data.username);
         } else {
             console.log('no data');
