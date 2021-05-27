@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
 
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_USER, QUERY_USERNAME } from '../../utils/queries';
 import { ADD_FRIEND } from '../../utils/mutations';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,9 +17,9 @@ const FriendsList = () => {
     // const { id: userParam } = useParams();
     // console.log(userParam);
     const me = useQuery(QUERY_USER);
-        // {
-        //     variables: { _id: userParam }
-        // });
+    // {
+    //     variables: { _id: userParam }
+    // });
     console.log(me.data);
     // console.log(me.data.user.friends);
     // const myFriends = me.data.user.friends;
@@ -94,7 +94,7 @@ const FriendsList = () => {
                     <p>{foundUser.lastName}</p>
                     <p>{foundUser.email}</p>
                     <button onClick={addFriendHandler} type='button'>Add Friend</button>
-                </div>
+                </div >
             ) : (
                 <div></div>
             )}

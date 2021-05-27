@@ -45,7 +45,7 @@ function Navbar() {
                     {Auth.loggedIn() ? (
                         <>
                         <ul className = {click ? 'nav-menu active' : 'nav-menu'}>
-                        <Link to="/wishlist" className = 'nav-links' onClick = {closeMobileMenu}> 
+                        <Link to="/dashboard" className = 'nav-links' onClick = {closeMobileMenu}> 
                             DashBoard
                         </Link>
                         <Link to="/shoppinglist" className = 'nav-links' onClick = {closeMobileMenu}> 

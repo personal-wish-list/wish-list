@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, WishList } = require('../models');
+const { User, WishList, Item } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -35,6 +35,13 @@ const resolvers = {
       const lists = await WishList.find();
       return lists;
     },
+
+    wishlist: async (parent, args, context) => {
+      if (context.user) {
+        return await WishList.findOne(args);
+      }
+    },
+
     username: async (parent, args, context) => {
       if (context.user) {
         return await User.findOne(args);
@@ -170,6 +177,14 @@ const resolvers = {
       return updatedList;
 
     },
+
+    claimItem: async (parent, { wishListId, itemId }, context) => {
+      const claimed = await WishList.findByIdAndUpdate(wishListId,
+        { items: { _id: itemId, isClaimed: true } },
+        { new: true });
+
+      return claimed;
+    }
   }
 };
 

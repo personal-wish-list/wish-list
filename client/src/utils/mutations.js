@@ -42,11 +42,11 @@ mutation addFriend($friendId: ID!) {
       username
     }
   }
-}`
+}`;
 
 export const ADD_WISHLIST = gql`
-mutation addWishList($name: String!, $month: Int!, $day: Int!, $year: Int!, $items: [ItemInput]!){
-  addWishList(name: $name, month: $month, day: $day, year: $year, items: $items){
+mutation addWishList($name: String!, $month: Int!, $day: Int!, $year: Int!){
+  addWishList(name: $name, month: $month, day: $day, year: $year){
     _id
     name
     month
@@ -60,4 +60,19 @@ mutation addWishList($name: String!, $month: Int!, $day: Int!, $year: Int!, $ite
       isClaimed
     }
     }
-  }`
+  }`;
+
+export const UPDATE_WISHLIST = gql`
+mutation updateWishList($_id:ID!, $input: ItemInput!){
+  updateWishList(_id: $_id, input: $input){
+		name
+    items{
+      _id
+      name
+      link
+      specialNote
+      price
+      isClaimed
+    }
+  }
+}`;
