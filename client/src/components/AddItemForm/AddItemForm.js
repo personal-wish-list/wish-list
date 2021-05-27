@@ -134,7 +134,7 @@ const AddItemForm = () => {
     // );
 
     return (
-        <section className = 'wrapper'>
+        <section>
             <h2 className = 'title '>Add an Item</h2>
             <form
                 id='add-item-form'

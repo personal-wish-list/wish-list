@@ -64,20 +64,25 @@ const WishList = () => {
     };
 
     return (
-        <div className="container">
+        
+        <div className = 'body'>
+            <div className = 'wrapper'>
 
-            <AddItemForm />
+                <AddItemForm />
+            </div>
+            
 
 
             {state.wishlist.length ? (
-                <div>
+                <div className = 'main'>
                     <button onClick={sortAlphabetically}>Sort Alphabetically</button>
                     <button onClick={sortPriceAscending}>Sort Price Asc</button>
                     <button onClick={sortPriceDescending}>Sort Price Desc</button>
-
+                <ul className = 'cards'>
                     {state.wishlist.map(item => (
                         <WishListItem key={item._id} item={item} />
                     ))}
+                </ul>
                 </div>
             ) : (
                 <div>

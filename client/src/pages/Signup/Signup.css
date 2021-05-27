@@ -171,7 +171,7 @@
   }
   
   /* CARDS */
-  .card {
+  .card-2 {
     margin: 15px 0 20px 0;
     border: 3px solid var(--dark);
     border-radius: var(--border-radius);
