@@ -96,7 +96,7 @@ const FriendsList = () => {
                     <p>{foundUser.lastName}</p>
                     <p>{foundUser.email}</p>
                     <button onClick={addFriendHandler} type='button'>Add Friend</button>
-                </div>
+                </div >
             ) : (
                 <div></div>
             )}
