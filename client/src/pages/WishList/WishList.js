@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import './wishlist.css';
 
+import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_WISHLIST } from '../../utils/mutations';
+
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import WishListItem from '../../components/WishListItem/WishListItem';
 
@@ -38,7 +41,7 @@ const WishList = () => {
             if (a.name > b.name) return 1;
             return 0;
         });
-        
+
         dispatch({
             type: SORT_WISHLIST_ALPHABETICALLY,
             wishlist: [state.wishlist]
