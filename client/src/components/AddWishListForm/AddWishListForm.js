@@ -47,7 +47,8 @@ const AddWishListForm = () => {
                     name: formState.name,
                     month: parseInt(formState.month),
                     day: parseInt(formState.day),
-                    year: parseInt(formState.year)
+                    year: parseInt(formState.year),
+                    items: formState.items
                 }
             });
         } catch (err) {
@@ -92,10 +93,8 @@ const AddWishListForm = () => {
                 <div className="form-input">
                     <label htmlFor="month">Month:</label>
                     <input
-                        type="number"
+                        type="Number"
                         name="month"
-                        min='1'
-                        max='12'
                         defaultValue={month}
                         onBlur={handleChange}
                     />
@@ -105,8 +104,6 @@ const AddWishListForm = () => {
                     <input
                         type="number"
                         name="day"
-                        min='1'
-                        max='31'
                         defaultValue={day}
                         onBlur={handleChange}
                     />

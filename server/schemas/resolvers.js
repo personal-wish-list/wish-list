@@ -36,17 +36,17 @@ const resolvers = {
       return lists;
     },
 
-    wishlist: async (parent, args, context) => {
-      if (context.user) {
-        return await WishList.findOne(args);
-      }
-    },
+    // wishlist: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return await WishList.findOne(args);
+    //   }
+    // },
 
-    username: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findOne(args);
-      }
-    },
+    // username: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return await User.findOne(args);
+    //   }
+    // },
 
     // checkout: async (parent, args, context) => {
     //   const url = new URL(context.headers.referer).origin;

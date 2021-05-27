@@ -50,6 +50,7 @@ const typeDefs = gql`
     user: User
     users: [User]
     wishlists: [WishList]
+    wishlist: WishList
     username(username: String!): User
   }
 
