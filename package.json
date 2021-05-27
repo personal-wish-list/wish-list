@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "apollo": "^2.33.4",
     "if-env": "^1.0.4"
   },
   "devDependencies": {
@@ -28,4 +29,3 @@
   },
   "homepage": "https://github.com/personal-wish-list/wish-list#readme"
 }
-
