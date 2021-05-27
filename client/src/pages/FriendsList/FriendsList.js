@@ -54,19 +54,6 @@ const FriendsList = () => {
         }
     };
 
-<<<<<<< HEAD
-
-    const handleClick = async () => {
-
-        // try {
-        //     await addFriend({
-        //         variables: { id: user._id }
-        //     });
-        // } catch (e) {
-        //     console.error(e);
-        // }
-    };
-=======
     const addFriendHandler = async () => {
         console.log(foundUser.username);
         try {
@@ -76,40 +63,39 @@ const FriendsList = () => {
         } catch (err) {
             console.error(err);
         }
->>>>>>> 006abce5fb3606a99b39fc2c731d0bf9bd7af2d0
 
-    dispatch({
-        type: ADD_USER_AS_FRIEND,
-        friend: foundUser
-    });
-};
+        dispatch({
+            type: ADD_USER_AS_FRIEND,
+            friend: foundUser
+        });
+    };
 
-return (
-    <div className="container">
+    return (
+        <div className="container">
 
-        <form id='friend-search' onSubmit={handleSearch}>
-            <label htmlFor='username'>Username:</label>
-            <input
-                className='searchbar'
-                type='text'
-                name='username'
-                placeholder='Find friends here...'
-                value={searchedUsername}
-                onChange={handleChange}
-            />
-            <button type='submit'>
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
+            <form id='friend-search' onSubmit={handleSearch}>
+                <label htmlFor='username'>Username:</label>
+                <input
+                    className='searchbar'
+                    type='text'
+                    name='username'
+                    placeholder='Find friends here...'
+                    value={searchedUsername}
+                    onChange={handleChange}
+                />
+                <button type='submit'>
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
 
-        {foundUser.username.length ? (
-            <div>
-                <p>{foundUser.username}</p>
-                <p>{foundUser.firstName}</p>
-                <p>{foundUser.lastName}</p>
-                <p>{foundUser.email}</p>
+            {foundUser.username.length ? (
+                <div>
+                    <p>{foundUser.username}</p>
+                    <p>{foundUser.firstName}</p>
+                    <p>{foundUser.lastName}</p>
+                    <p>{foundUser.email}</p>
 <<<<<<< HEAD
-<button onClick={handleClick} type='button'>Add Friend</button>
+    <button onClick={handleClick} type='button'>Add Friend</button>
 =======
                     <button onClick={addFriendHandler} type='button'>Add Friend</button>
 >>>>>>> 006abce5fb3606a99b39fc2c731d0bf9bd7af2d0
