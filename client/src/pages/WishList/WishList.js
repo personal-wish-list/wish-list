@@ -66,11 +66,6 @@ const WishList = () => {
     return (
         <div className="container">
 
-            {/* ======= FOR TESTING ONLY ========================== */}
-            <h2 className='text-green'>Wishlist</h2>
-            {/* ==================================================== */}
-
-
             <AddItemForm />
 
 
