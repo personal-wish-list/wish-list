@@ -174,6 +174,17 @@ const resolvers = {
         { new: true }
       )
 
+      let updatedUser = await User.findOneAndUpdate(
+        { _id: context.user._id },
+        {
+          $set: {
+            lists: updatedList
+          }
+        },
+        { new: true });
+
+      console.log(updatedUser);
+
       return updatedList;
 
     },
