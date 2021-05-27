@@ -66,6 +66,8 @@ const FriendsList = () => {
             type: ADD_USER_AS_FRIEND,
             friend: foundUser
         });
+
+        // window.location.reload();
     };
 
     return (

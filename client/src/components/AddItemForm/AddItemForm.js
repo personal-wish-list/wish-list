@@ -77,6 +77,8 @@ const AddItemForm = () => {
             isClaimedBy: isClaimedBy
         });
 
+        // window.location.reload();
+
         // setFormState({
         //     _id: '',
         //     name: '',
