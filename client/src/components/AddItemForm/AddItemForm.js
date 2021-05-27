@@ -113,6 +113,7 @@ const AddItemForm = () => {
                             defaultValue={name}
                             onBlur={handleChange}
                             className='input'
+                            placeholder='What do you want?'
                         />
                     </div>
                     <div className="input-fields">
@@ -123,6 +124,7 @@ const AddItemForm = () => {
                             defaultValue={link}
                             onBlur={handleChange}
                             className='input'
+                            placeholder='Copy and paste link here'
                         />
                     </div>
                     <div className="input-fields">
@@ -132,6 +134,7 @@ const AddItemForm = () => {
                             name="price"
                             onBlur={handleChange}
                             className='input'
+                            placeholder='$$$$'
                         />
                     </div>
                     <div className="msg">
@@ -142,12 +145,13 @@ const AddItemForm = () => {
                             defaultValue={specialNote}
                             onBlur={handleChange}
                             className='input'
+                            placeholder='Size, color, etc...'
                         />
                     </div>
 
                     <button className='btn' type="submit" data-testid="submit">
                         Submit
-                </button>
+                    </button>
                 </div>
             </form>
         </section>

@@ -88,6 +88,7 @@ const AddWishListForm = () => {
                         name="name"
                         defaultValue={name}
                         onBlur={handleChange}
+                        placeholder='Birthday, wedding, etc...'
                         className = 'input'
                     />
                 </div>
