@@ -12,19 +12,9 @@
 
 }
 
-body{
-  background: url('https://unsplash.com/photos/z0LekqawELA') no-repeat top center;
-  background-size: cover;
-  height: 100vh;
-}
 
 .wrapper{
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 550px;
+  width: 50%;
   background: rgba(0,0,0,0.8);
   padding: 30px;
   border-radius: 5px;
@@ -46,11 +36,6 @@ body{
   display: flex;
   flex-direction: column;
   margin-right: 4%;
-}
-
-.input-fields,
-.msg{
-  width: 48%;
 }
 
 .input-fields .input,
