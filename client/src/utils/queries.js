@@ -51,4 +51,23 @@ export const QUERY_USERNAME = gql`
       email
     }
   }
-`
+`;
+
+export const QUERY_WISHLIST = gql`
+query($_id: ID!){
+  wishlist(_id: $_id){
+    name
+    month
+    day
+    year
+    items{
+      _id
+      name
+      link
+      specialNote
+      price
+      isClaimed
+    }
+  }
+}
+`;

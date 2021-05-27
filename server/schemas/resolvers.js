@@ -36,11 +36,13 @@ const resolvers = {
       return lists;
     },
 
-    // wishlist: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return await WishList.findOne(args);
-    //   }
-    // },
+    wishlist: async (parent, args, context) => {
+      if (context.user) {
+        const oneList = await WishList.findOne(args)
+        console.log(oneList);
+        return oneList;
+      }
+    },
 
     // username: async (parent, args, context) => {
     //   if (context.user) {
