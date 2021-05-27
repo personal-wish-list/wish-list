@@ -6,6 +6,9 @@ import WishListItem from '../../components/WishListItem/WishListItem';
 
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { useQuery } from '@apollo/react-hooks';
+import { QUERY_USER } from '../../utils/queries';
 import { idbPromise } from '../../utils/idb';
 import {
     ADD_MULTIPLE_TO_WISHLIST,
@@ -17,6 +20,11 @@ import {
 
 const WishList = () => {
     const { _id } = useParams();
+    const { data } = useQuery(QUERY_USER)
+    let wishListId = window.location.pathname;
+    wishListId = wishListId.split('/');
+    wishListId = wishListId[2];
+
     // ================================================================
     // useParams WOULD GO HERE ALONG WITH wishlist query TO FIND BY _id
     // ================================================================
@@ -25,7 +33,6 @@ const WishList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
         const getWishlist = async () => {
             const wishlist = await idbPromise('wishlist', 'get');
             dispatch({
@@ -37,7 +44,7 @@ const WishList = () => {
         if (!state.wishlist.length) {
             getWishlist();
         }
-    }, [state.wishlist.length, dispatch]);
+    }, [data, state.wishlist.length, dispatch]);
 
     const sortAlphabetically = () => {
         state.wishlist.sort((a, b) => {
@@ -71,25 +78,25 @@ const WishList = () => {
     };
 
     return (
-        
-        <div className = 'body'>
+
+        <div className='body'>
             <h1> Wish List </h1>
-            <div className = 'wrapper'>
+            <div className='wrapper'>
                 <AddItemForm />
             </div>
 
 
 
             {state.wishlist.length ? (
-                <div className = 'main'>
-                    <button className = 'btn card_btn' onClick={sortAlphabetically}>Sort Alphabetically</button>
-                    <button className = 'btn card_btn' onClick={sortPriceAscending}>Sort Price Asc</button>
-                    <button className = 'btn card_btn' onClick={sortPriceDescending}>Sort Price Desc</button>
-                <ul className = 'cards'>
-                    {state.wishlist.map(item => (
-                        <WishListItem key={item._id} item={item} />
-                    ))}
-                </ul>
+                <div className='main'>
+                    <button className='btn card_btn' onClick={sortAlphabetically}>Sort Alphabetically</button>
+                    <button className='btn card_btn' onClick={sortPriceAscending}>Sort Price Asc</button>
+                    <button className='btn card_btn' onClick={sortPriceDescending}>Sort Price Desc</button>
+                    <ul className='cards'>
+                        {state.wishlist.map(item => (
+                            <WishListItem key={item._id} item={item} />
+                        ))}
+                    </ul>
                 </div>
             ) : (
                 <div>

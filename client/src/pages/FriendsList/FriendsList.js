@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useParams } from 'react-router-dom';
 import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
 
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_USER, QUERY_USERNAME } from '../../utils/queries';
 import { ADD_FRIEND } from '../../utils/mutations';
-import { useDispatch } from 'react-redux';
-import { ADD_USER_AS_FRIEND } from '../../utils/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD_USER_AS_FRIEND, REMOVE_USER_AS_FRIEND } from '../../utils/actions';
+import Auth from '../../utils/auth';
 
 const FriendsList = () => {
+    const state = useSelector(state => state);
     const dispatch = useDispatch();
 
-    const { loading, data } = useQuery(QUERY_USER);
-    const [myFriends, setMyFriends] = useState([]);
-    useEffect(() => {
-        if (data) {
-            setMyFriends(data.user.friends);
-        }
-    }, [loading, data]);
+    // const { id: userParam } = useParams();
+    // console.log(userParam);
+    const me = useQuery(QUERY_USER);
+    // {
+    //     variables: { _id: userParam }
+    // });
+    //console.log(me.data.user.friends);
+    //let myFriends = me.data.user.friends;
 
-
-
-
-    let searchedUserObj = {
+    let userObj = {
         _id: '',
         username: '',
         firstName: '',
@@ -30,8 +31,8 @@ const FriendsList = () => {
         email: ''
     };
     const [searchedUsername, setSearchedUsername] = useState('');
-    const [foundUser, setFoundUser] = useState(searchedUserObj);
-    const usernameSearch = useQuery(QUERY_USERNAME, {
+    const [foundUser, setFoundUser] = useState(userObj);
+    const { data } = useQuery(QUERY_USERNAME, {
         variables: { username: searchedUsername }
     });
     const [addFriend] = useMutation(ADD_FRIEND);
@@ -44,8 +45,8 @@ const FriendsList = () => {
     const handleSearch = e => {
         e.preventDefault();
 
-        if (usernameSearch.data) {
-            setFoundUser(usernameSearch.data.username);
+        if (data) {
+            setFoundUser(data.username);
         } else {
             console.log('no data');
         }
@@ -97,13 +98,16 @@ const FriendsList = () => {
                 <div></div>
             )}
 
-            {myFriends &&
-                myFriends.map(friend => (
-                    <div>
+
+            {/* {myFriends.length ? (
+                <div>
+                    {myFriends.map(friend => {
                         <FriendCard key={friend._id} friend={friend} />
-                    </div>
-                ))
-            }
+                    })}
+                </div>
+            ) : (
+                <div></div>
+            )} */}
 
         </div >
     );
