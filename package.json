@@ -4,6 +4,7 @@
   "description": "",
   "main": "server/server.js",
   "dependencies": {
+    "apollo": "^2.33.4",
     "if-env": "^1.0.4"
   },
   "devDependencies": {

@@ -14,6 +14,9 @@
   <title>Wish List</title>
 </head>
 
+<<<<<<< HEAD
+<footer>
+=======
 <body>
 
   <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -24,6 +27,7 @@
 
   <!-- facebook login stuff -->
 
+>>>>>>> a09f4dfed5cb227681727077224a46a605c93266
   <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default"
     data-auto-logout-link="false" data-use-continue-as="false"></div>
   <div id="fb-root"></div>
@@ -32,12 +36,12 @@
     nonce="PYnN89I8"></script>
   <script>
 
-    function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+    function statusChangeCallback(response) {  // results from ftn
       console.log('statusChangeCallback');
-      console.log(response);                   // The current login status of the person.
-      if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+      console.log(response);                   // login status
+      if (response.status === 'connected') {   // successful login
         testAPI();
-      } else {                                 // Not logged into your webpage or we are unable to tell.
+      } else {                                 // unsuccessful login 
         document.getElementById('status').innerHTML = 'Please log ' +
           'into this webpage.';
       }
@@ -46,17 +50,17 @@
 
 
 
-    function checkLoginState() {               // Called when a person is finished with the Login Button.
-      FB.getLoginStatus(function (response) {   // See the onlogin handler
+    function checkLoginState() {               // person is finished with login btn
+      FB.getLoginStatus(function (response) {   
         statusChangeCallback(response);
         console.log(response)
       });
       FB.login(function (response) {
         if (response.status === 'connected') {
-          // Logged into your webpage and Facebook.
+          // successful login to webpage 
           console.log("connection sucessful")
         } else {
-          // The person is not logged into your webpage or we are unable to tell. 
+          // Person unsuccessfully logged in 
           console.log("not connected, pls try again")
         }
       });
@@ -67,18 +71,18 @@
     window.fbAsyncInit = function () {
       FB.init({
         appId: '247886597112917',
-        cookie: true,                     // Enable cookies to allow the server to access the session.
-        xfbml: true,                     // Parse social plugins on this webpage.
+        cookie: true,                     // Enable cookies
+        xfbml: true,                     
         version: 'v10.0'           // Use this Graph API version for this call.
       });
 
 
-      FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
-        statusChangeCallback(response);        // Returns the login status.
+      FB.getLoginStatus(function (response) {   
+        statusChangeCallback(response);        // Returns login status
       });
     };
 
-    function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    function testAPI() {                      // Testing API after login.  See statusChangeCallback() for when this call is made.
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me', function (response) {
         console.log('Successful login for: ' + response.name);
@@ -106,6 +110,12 @@
   <!-- Load the JS SDK asynchronously -->
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
+<<<<<<< HEAD
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</footer>
+=======
 </body>
+>>>>>>> a09f4dfed5cb227681727077224a46a605c93266
 
 </html>
