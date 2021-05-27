@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import './wishlist.css';
 
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_WISHLIST } from '../../utils/mutations';
+import { ADD_NEW_WISHLIST, UPDATE_WISHLIST } from '../../utils/mutations';
 
 import AddItemForm from '../../components/AddItemForm/AddItemForm';
 import WishListItem from '../../components/WishListItem/WishListItem';
@@ -18,10 +18,13 @@ import {
 
 
 const WishList = () => {
+    const [addWishy] = useMutation(ADD_NEW_WISHLIST);
+    const [updateWishy] = useMutation(UPDATE_WISHLIST);
     const state = useSelector(state => state);
     const dispatch = useDispatch();
 
     useEffect(() => {
+
         const getWishlist = async () => {
             const wishlist = await idbPromise('wishlist', 'get');
             dispatch({
@@ -33,7 +36,7 @@ const WishList = () => {
         if (!state.wishlist.length) {
             getWishlist();
         }
-    }, [state.wishlist.length, dispatch]);
+    }, [addWishy, state.wishlist.length, dispatch]);
 
     const sortAlphabetically = () => {
         state.wishlist.sort((a, b) => {
@@ -67,25 +70,25 @@ const WishList = () => {
     };
 
     return (
-        
-        <div className = 'body'>
-            <div className = 'wrapper'>
+
+        <div className='body'>
+            <div className='wrapper'>
 
                 <AddItemForm />
             </div>
-            
+
 
 
             {state.wishlist.length ? (
-                <div className = 'main'>
+                <div className='main'>
                     <button onClick={sortAlphabetically}>Sort Alphabetically</button>
                     <button onClick={sortPriceAscending}>Sort Price Asc</button>
                     <button onClick={sortPriceDescending}>Sort Price Desc</button>
-                <ul className = 'cards'>
-                    {state.wishlist.map(item => (
-                        <WishListItem key={item._id} item={item} />
-                    ))}
-                </ul>
+                    <ul className='cards'>
+                        {state.wishlist.map(item => (
+                            <WishListItem key={item._id} item={item} />
+                        ))}
+                    </ul>
                 </div>
             ) : (
                 <div>

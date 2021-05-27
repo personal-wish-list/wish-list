@@ -60,6 +60,7 @@ const typeDefs = gql`
     addFriend(friendId: ID!): User
     addWishList(name: String!, month: Int!, day: Int!, year: Int!, items: [ItemInput]!): WishList
     updateWishList(_id: ID!, input: ItemInput!): WishList
+    claimItem(wishListId: ID!, itemId: ID!): WishList
   }
 `;
 
