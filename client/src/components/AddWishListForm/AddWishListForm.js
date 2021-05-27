@@ -9,6 +9,9 @@ import { ADD_WISHLIST } from '../../utils/mutations';
 import { useMutation } from "@apollo/react-hooks";
 
 const AddWishListForm = () => {
+    const date = new Date();
+    const thisYear = date.getFullYear();
+
     const dispatch = useDispatch();
     const [addWishlist, { error }] = useMutation(ADD_WISHLIST);
     const { _id } = useParams();
@@ -17,9 +20,9 @@ const AddWishListForm = () => {
         = useState({
             _id: '',
             name: '',
-            month: '',
-            day: '',
-            year: '',
+            month: 1,
+            day: 1,
+            year: thisYear,
             items: []
         });
     let {
@@ -30,8 +33,6 @@ const AddWishListForm = () => {
         items
     } = formState;
 
-    const date = new Date();
-    const thisYear = date.getFullYear();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,13 +45,13 @@ const AddWishListForm = () => {
             await addWishlist({
                 variables: {
                     name: formState.name,
-                    month: formState.month,
-                    day: formState.day,
-                    year: formState.year
+                    month: parseInt(formState.month),
+                    day: parseInt(formState.day),
+                    year: parseInt(formState.year)
                 }
             });
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
         // ===================================
 
@@ -58,10 +59,10 @@ const AddWishListForm = () => {
             type: ADD_A_WISHLIST,
             item: { ...formState }
         });
-        idbPromise('wishlists', 'put', {
-            ...formState,
-            items: items
-        });
+        // idbPromise('wishlists', 'put', {
+        //     ...formState,
+        //     items: items
+        // });
     };
 
     const handleChange = e => {
