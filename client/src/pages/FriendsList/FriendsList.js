@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
 import './friends-list.css';
 import FriendCard from '../../components/FriendCard';
 
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { QUERY_USER, QUERY_USERNAME } from '../../utils/queries';
 import { ADD_FRIEND } from '../../utils/mutations';
-import { useDispatch, useSelector } from 'react-redux';
-import { ADD_USER_AS_FRIEND, REMOVE_USER_AS_FRIEND } from '../../utils/actions';
-import Auth from '../../utils/auth';
+import { useDispatch } from 'react-redux';
+import { ADD_USER_AS_FRIEND } from '../../utils/actions';
 
 const FriendsList = () => {
     const dispatch = useDispatch();
@@ -17,9 +15,7 @@ const FriendsList = () => {
     const [myFriends, setMyFriends] = useState([]);
     useEffect(() => {
         if (data) {
-            console.log(data.user.friends);
             setMyFriends(data.user.friends);
-            console.log(myFriends[0].firstName);
         }
     }, [loading, data]);
 
@@ -101,19 +97,13 @@ const FriendsList = () => {
                 <div></div>
             )}
 
-
-            {myFriends.length ? (
-                <div>
-                    {myFriends.map(friend => {
-                        <div>
-                            <h2>{friend.firstName}</h2>
-                            {/* <FriendCard key={friend._id} friend={friend} /> */}
-                        </div>
-                    })}
-                </div>
-            ) : (
-                <div></div>
-            )}
+            {myFriends &&
+                myFriends.map(friend => (
+                    <div>
+                        <FriendCard key={friend._id} friend={friend} />
+                    </div>
+                ))
+            }
 
         </div >
     );
