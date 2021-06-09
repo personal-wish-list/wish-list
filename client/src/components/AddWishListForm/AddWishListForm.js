@@ -12,6 +12,10 @@ const AddWishListForm = () => {
     const date = new Date();
     const thisYear = date.getFullYear();
 
+    // ========================================================================================
+    // USE EFFECT FUNCTION HERE TO CONDITIONALLY RENDER ALL USERS WISHLISTS ANY TIME IT CHANGES
+    // ========================================================================================
+
     const dispatch = useDispatch();
     const [addWishlist, { error }] = useMutation(ADD_WISHLIST);
     const { _id } = useParams();

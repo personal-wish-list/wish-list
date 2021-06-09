@@ -15,6 +15,14 @@ import {
 import { formatUrl } from '../../utils/helpers';
 
 const WishListItem = ({ item }) => {
+    // ========================================================================================
+    // GraphQL mutations to:
+    //     * update item
+    //     * delete item
+    //     (these may be the same thing...)
+    // ========================================================================================
+
+
     let {
         _id,
         name,

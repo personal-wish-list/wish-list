@@ -25,6 +25,9 @@ const WishList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // ==========================================================================
+        // FIX BUG WHERE ONLY MOST RECENTLY ADDED ITEM RENDERS WHEN PAGE IS REFRESHED
+        // ==========================================================================
 
         const getWishlist = async () => {
             const wishlist = await idbPromise('wishlist', 'get');

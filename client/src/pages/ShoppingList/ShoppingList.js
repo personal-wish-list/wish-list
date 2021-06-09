@@ -12,6 +12,8 @@ const ShoppingList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        // CHANGE TO GET USER'S SHOPPING LIST FROM DATABASE
+        // WHEN THIS FEATURE IS ADDED TO BACK END
         const getShoppingList = async () => {
             const shoppingList = await idbPromise('shopping list', 'get');
             dispatch({

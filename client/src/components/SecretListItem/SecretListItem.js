@@ -7,6 +7,13 @@ import { ADD_TO_SHOPPING_LIST, UPDATE_SECRET_LIST_ITEM } from '../../utils/actio
 import { formatUrl } from '../../utils/helpers';
 
 const SecretListItem = ({ item }) => {
+    // ========================================================================================
+    // GraphQL mutations to:
+    //     * claim item
+    //     * unclaim item (maybe in ShoppingListItem too)
+    // ========================================================================================
+
+
     const state = useSelector(state => state);
     const { shoppingList } = state;
     const dispatch = useDispatch();
@@ -26,9 +33,9 @@ const SecretListItem = ({ item }) => {
         if (itemInShoppingList) return;
         else {
             isClaimed = true;
-    // --- CHANGE TO FRIEND'S USERNAME ---------
+            // --- CHANGE TO FRIEND'S USERNAME ---------
             isClaimedBy = 'Me';
-    // ---------------------------------------
+            // ---------------------------------------
 
             dispatch({
                 type: ADD_TO_SHOPPING_LIST,

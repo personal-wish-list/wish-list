@@ -16,6 +16,11 @@ const AddItemForm = () => {
     wishListId = wishListId[2];
     const dispatch = useDispatch();
 
+    // ==========================================================================
+    // USE EFFECT FUNCTION HERE TO CONDITIONALLY RENDER ALL ITEMS WITH ANY UPDATE
+    // ==========================================================================
+
+
     const [formState, setFormState]
         = useState({
             _id: '',

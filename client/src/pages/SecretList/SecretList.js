@@ -101,6 +101,7 @@ const SecretList = () => {
     };
 
 
+    // * * * FUTURE FEATURE * * *
     // const chooseRandomGift = () => {
     //     setIsFiltering(true)
 
@@ -152,6 +153,8 @@ const SecretList = () => {
                 />
             </div>
             <button onClick={stopFiltering}>Clear Filters</button>
+            
+            {/* * * * FUTURE FEATURE * * * */}
             {/* <button onClick={chooseRandomGift}>Select Random Gift!</button> */}
 
             <button onClick={sortAlphabetically}>Sort Alphabetically</button>
