@@ -17,10 +17,14 @@ const Dashboard = () => {
         if (data) {
             setQueryState(data);
             setWishlists(data.user.lists);
-            
+
             console.log(queryState);
+            const newList = document.createElement("div");
+            newList.textContent = "hello";
+
         }
-    }, [data, loading, queryState]);
+    }, [data, loading, queryState, wishlists]);
+
 
     if (loading) return <div>Loading...</div>
 
@@ -31,7 +35,7 @@ const Dashboard = () => {
 
             {wishlists &&
                 wishlists.map(wishlist => (
-                    <div>
+                    <div key={wishlist._id}>
                         <Link
                             // =================================================
                             // TRYING TO USE PARAMS TO NAVIGATE TO WISHLIST PAGE
